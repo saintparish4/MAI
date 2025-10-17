@@ -1,0 +1,37 @@
+# Root level .gitignore for MAI project
+
+# Rails specific ignores
+/store/log/*
+!/store/log/.keep
+/store/tmp/*
+!/store/tmp/.keep
+!/store/tmp/pids/.keep
+!/store/tmp/storage/.keep
+/store/storage/*
+!/store/storage/.keep
+/store/public/assets
+
+# Next.js specific ignores
+/base/node_modules
+/base/.next
+/base/out
+/base/build
+/base/.env*
+
+# General ignores
+.DS_Store
+*.log
+*.tmp
+*.cache
+.env*
+*.pem
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS files
+Thumbs.db
+.DS_Store
