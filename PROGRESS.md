@@ -5,13 +5,13 @@ Target Completion: November 13, 2025
 
 ## Week 1: Authentication + Basic Models
 - [ ] Day 1-2: Rails Setup
-  - [x] Create Rails API app
-  - [ ] Add bcrypt, rack-cors
-  - [ ] Create User model
-  - [ ] Signup/login endpoints
+  - [X] Create Rails API app
+  - [X] Add bcrypt, rack-cors
+  - [X] Create User model
+  - [X] Signup/login endpoints
   - [ ] Test with Postman
 - [ ] Day 3-4: Next.js Setup
-  - [ ] Create Next.js app
+  - [X] Create Next.js app
   - [ ] Install Tailwind + shadcn
   - [ ] Login/signup pages
   - [ ] Connect to Rails
