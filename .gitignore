@@ -1,6 +1,6 @@
 # Root level .gitignore for MAI project
 
-# Rails specific ignores
+# Rails specific ignores (legacy store directory)
 /store/log/*
 !/store/log/.keep
 /store/tmp/*
@@ -10,6 +10,22 @@
 /store/storage/*
 !/store/storage/.keep
 /store/public/assets
+
+# Rails API specific ignores
+/api/log/*
+!/api/log/.keep
+/api/tmp/*
+!/api/tmp/.keep
+!/api/tmp/pids/.keep
+!/api/tmp/storage/.keep
+/api/storage/*
+!/api/storage/.keep
+/api/public/assets
+/api/config/master.key
+/api/config/credentials.yml.enc
+/api/storage/development.sqlite3
+/api/storage/*.sqlite3
+/api/storage/*.sqlite3-*
 
 # Next.js specific ignores
 /base/node_modules
