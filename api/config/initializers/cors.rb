@@ -3,7 +3,9 @@ Rails.application.config.middleware.insert_before 0, Rack::Cors do
         origins "https://mai-omega.vercel.app", "http://localhost:3000"
 
         resource "*",
+        headers: :any,
         methods: [:get, :post, :put, :patch, :delete, :options, :head],
-        credentials: true # Important for cookies!
+        credentials: true,
+        expose: ["Authorization"]
     end
 end
