@@ -10,7 +10,7 @@ Target Completion: November 13, 2025
   - [X] Create User model
   - [X] Signup/login endpoints
   - [x] Test with Postman
-- [ ] Day 3-4: Next.js Setup
+- [x] Day 3-4: Next.js Setup
   - [X] Create Next.js app
   - [ ] Install Tailwind + shadcn
   - [x] Login/signup pages

@@ -3,7 +3,7 @@ Rails.application.routes.draw do
  post 'auth/login', to: 'auth#login'
  delete 'auth/logout', to: 'auth#logout'
  get 'auth/me', to: 'auth#me'
-
- # Example protected route
- # resources :posts 
+ 
+ # Providers routes
+ resources :providers, only: [:index, :show] 
 end

@@ -1,9 +1,74 @@
-# This file should ensure the existence of records required to run the application in every environment (production,
-# development, test). The code here should be idempotent so that it can be executed at any point in every environment.
-# The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
-#
-# Example:
-#
-#   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
-#     MovieGenre.find_or_create_by!(name: genre_name)
-#   end
+puts " Seeding providers..."
+
+Provider.destroy_all
+
+providers_data = [
+  {
+    name: "Dr. Sarah Chen",
+    specialty: "Physical Therapy",
+    bio: "Specialized in sports injury rehabilitation with over 10 years of experience. Helped hundreds of athletes return to peak performance.",
+    location: "San Francisco, CA",
+    hourly_rate: 125.00,
+    experience_years: 10,
+    rating: 4.9,
+    avatar_url: "https://i.pravatar.cc/150?img=5"
+  },
+  {
+    name: "Marcus Johnson",
+    specialty: "Personal Training",
+    bio: "NASM certified personal trainer focused on strength training and body composition. Former college athlete with a passion for helping clients achieve their fitness goals.",
+    location: "Los Angeles, CA",
+    hourly_rate: 85.00,
+    experience_years: 6,
+    rating: 4.7,
+    avatar_url: "https://i.pravatar.cc/150?img=12"
+  },
+  {
+    name: "Dr. Emily Rodriguez",
+    specialty: "Nutrition Counseling",
+    bio: "Registered dietitian specializing in plant-based nutrition and metabolic health. Evidence-based approach to sustainable lifestyle changes.",
+    location: "Austin, TX",
+    hourly_rate: 95.00,
+    experience_years: 8,
+    rating: 4.8,
+    avatar_url: "https://i.pravatar.cc/150?img=9"
+  },
+  {
+    name: "James Park",
+    specialty: "Yoga Instruction",
+    bio: "200-hour RYT certified yoga instructor with expertise in Vinyasa and restorative practices. Creating mindful movement experiences for all levels.",
+    location: "Seattle, WA",
+    hourly_rate: 70.00,
+    experience_years: 5,
+    rating: 4.6,
+    avatar_url: "https://i.pravatar.cc/150?img=14"
+  },
+  {
+    name: "Dr. Michael Thompson",
+    specialty: "Mental Health Counseling",
+    bio: "Licensed clinical psychologist specializing in cognitive behavioral therapy and mindfulness-based interventions. Supporting individuals through life transitions.",
+    location: "New York, NY",
+    hourly_rate: 150.00,
+    experience_years: 12,
+    rating: 5.0,
+    avatar_url: "https://i.pravatar.cc/150?img=13"
+  }
+]
+
+providers_data.each do |provider_data|
+  provider = Provider.create!(provider_data)
+  
+  # Create availability for each provider (Monday-Friday, 9 AM - 5 PM)
+  (1..5).each do |day|
+    provider.availabilities.create!(
+      day_of_week: day,
+      start_time: '09:00',
+      end_time: '17:00',
+      is_available: true
+    )
+  end
+  
+  puts " Created provider: #{provider.name}"
+end
+
+puts " Seeded #{Provider.count} providers with availability!"
