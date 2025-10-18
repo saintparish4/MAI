@@ -40,6 +40,19 @@ export interface ProvidersResponse {
   total: number;
 }
 
+export interface TimeSlot {
+  start_time: string;
+  end_time: string;
+  date: string;
+  time: string;
+}
+
+export interface AvailableSlotsResponse {
+  provider_id: number;
+  slots: Record<string, TimeSlot[]>; // grouped by date
+  total_slots: number;
+}
+
 export async function signup(
   email: string,
   password: string
@@ -142,5 +155,21 @@ export async function getProvider(id: number): Promise<Provider> {
     credentials: "include",
   });
   if (!res.ok) throw new Error("Provider not found");
+  const data = await res.json();
+  return data.provider;
+}
+
+export async function getAvailableSlots(
+  providerId: number
+): Promise<AvailableSlotsResponse> {
+  const res = await fetch(
+    `${API_URL}/providers/${providerId}/available_slots`,
+    {
+      credentials: "include",
+    }
+  );
+  if (!res.ok) {
+    throw new Error("Failed to fetch available slots");
+  }
   return res.json();
 }
