@@ -1,5 +1,23 @@
 const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3001";
 
+// Token management
+const TOKEN_KEY = 'mai_auth_token';
+
+export function getToken(): string | null {
+  if (typeof window === 'undefined') return null;
+  return localStorage.getItem(TOKEN_KEY);
+}
+
+export function setToken(token: string): void {
+  if (typeof window === 'undefined') return;
+  localStorage.setItem(TOKEN_KEY, token);
+}
+
+export function removeToken(): void {
+  if (typeof window === 'undefined') return;
+  localStorage.removeItem(TOKEN_KEY);
+}
+
 export interface User {
   id: number;
   email: string;
@@ -76,7 +94,6 @@ export async function signup(
   const res = await fetch(`${API_URL}/auth/signup`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    credentials: "include", // Critical for cookies
     body: JSON.stringify({
       email,
       password,
@@ -90,6 +107,11 @@ export async function signup(
     throw new Error(data.error || data.errors?.join(", ") || "Signup failed");
   }
 
+  // Store token for future requests
+  if (data.token) {
+    setToken(data.token);
+  }
+
   return data;
 }
 
@@ -100,7 +122,6 @@ export async function login(
   const res = await fetch(`${API_URL}/auth/login`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    credentials: "include",
     body: JSON.stringify({ email, password }),
   });
 
@@ -110,29 +131,50 @@ export async function login(
     throw new Error(data.error || "Login failed");
   }
 
+  // Store token for future requests
+  if (data.token) {
+    setToken(data.token);
+  }
+
   return data;
 }
 
 export async function logout(): Promise<void> {
-  await fetch(`${API_URL}/auth/logout`, {
-    method: "DELETE",
-    credentials: "include",
-  });
+  const token = getToken();
+  if (token) {
+    await fetch(`${API_URL}/auth/logout`, {
+      method: "DELETE",
+      headers: {
+        "Authorization": `Bearer ${token}`,
+      },
+    });
+  }
+  removeToken();
 }
 
 export async function getCurrentUser(): Promise<User | null> {
   try {
+    const token = getToken();
+    if (!token) {
+      return null;
+    }
+
     const res = await fetch(`${API_URL}/auth/me`, {
-      credentials: "include",
+      headers: {
+        "Authorization": `Bearer ${token}`,
+      },
     });
 
     if (!res.ok) {
+      // Token is invalid, remove it
+      removeToken();
       return null;
     }
 
     const data = await res.json();
     return data.user;
   } catch (error) {
+    removeToken();
     return null;
   }
 }
@@ -155,8 +197,14 @@ export async function getProviders(params?: {
     queryParams.toString() ? `?${queryParams}` : ""
   }`;
 
+  const token = getToken();
+  const headers: HeadersInit = {};
+  if (token) {
+    headers["Authorization"] = `Bearer ${token}`;
+  }
+
   const res = await fetch(url, {
-    credentials: "include",
+    headers,
   });
 
   if (!res.ok) {
@@ -167,8 +215,14 @@ export async function getProviders(params?: {
 }
 
 export async function getProvider(id: number): Promise<Provider> {
+  const token = getToken();
+  const headers: HeadersInit = {};
+  if (token) {
+    headers["Authorization"] = `Bearer ${token}`;
+  }
+
   const res = await fetch(`${API_URL}/providers/${id}`, {
-    credentials: "include",
+    headers,
   });
   if (!res.ok) throw new Error("Provider not found");
   const data = await res.json();
@@ -178,10 +232,16 @@ export async function getProvider(id: number): Promise<Provider> {
 export async function getAvailableSlots(
   providerId: number
 ): Promise<AvailableSlotsResponse> {
+  const token = getToken();
+  const headers: HeadersInit = {};
+  if (token) {
+    headers["Authorization"] = `Bearer ${token}`;
+  }
+
   const res = await fetch(
     `${API_URL}/providers/${providerId}/available_slots`,
     {
-      credentials: "include",
+      headers,
     }
   );
   if (!res.ok) {
@@ -196,10 +256,17 @@ export async function bookAppointment(params: {
   end_time: string;
   notes?: string;
 }): Promise<Appointment> {
+  const token = getToken();
+  const headers: HeadersInit = {
+    "Content-Type": "application/json",
+  };
+  if (token) {
+    headers["Authorization"] = `Bearer ${token}`;
+  }
+
   const res = await fetch(`${API_URL}/appointments`, {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
-    credentials: "include",
+    headers,
     body: JSON.stringify(params),
   });
 
@@ -213,8 +280,14 @@ export async function bookAppointment(params: {
 }
 
 export async function getAppointments(): Promise<AppointmentsResponse> {
+  const token = getToken();
+  const headers: HeadersInit = {};
+  if (token) {
+    headers["Authorization"] = `Bearer ${token}`;
+  }
+
   const res = await fetch(`${API_URL}/appointments`, {
-    credentials: "include", 
+    headers,
   });
 
   if (!res.ok) {
@@ -225,10 +298,17 @@ export async function getAppointments(): Promise<AppointmentsResponse> {
 }
 
 export async function cancelAppointment(id: number): Promise<Appointment> {
+  const token = getToken();
+  const headers: HeadersInit = {
+    "Content-Type": "application/json",
+  };
+  if (token) {
+    headers["Authorization"] = `Bearer ${token}`;
+  }
+
   const res = await fetch(`${API_URL}/appointments/${id}/cancel`, {
     method: "PATCH",
-    headers: { "Content-Type": "application/json" },
-    credentials: "include",
+    headers,
   });
 
   const data = await res.json();
