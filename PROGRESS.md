@@ -13,9 +13,9 @@ Target Completion: November 13, 2025
 - [ ] Day 3-4: Next.js Setup
   - [X] Create Next.js app
   - [ ] Install Tailwind + shadcn
-  - [ ] Login/signup pages
-  - [ ] Connect to Rails
-  - [ ] Auth working end-to-end
+  - [x] Login/signup pages
+  - [x] Connect to Rails
+  - [x] Auth working end-to-end
 - [ ] Day 5-7: Provider Models
   - [ ] Create Provider, Availability models
   - [ ] Seed 5 providers
