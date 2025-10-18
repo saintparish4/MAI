@@ -15,7 +15,7 @@ Rails.application.routes.draw do
   # Appointments routes
   resources :appointments, only: [:index, :show, :create] do
     member do 
-        patch 'cancel' 
+        patch :cancel
     end
   end
 end

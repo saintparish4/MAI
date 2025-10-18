@@ -53,6 +53,22 @@ export interface AvailableSlotsResponse {
   total_slots: number;
 }
 
+export interface Appointment {
+  id: number;
+  patient_id: number;
+  provider_id: number;
+  start_time: string;
+  end_time: string;
+  status: string;
+  notes?: string;
+  provider?: Provider;
+}
+
+export interface AppointmentsResponse {
+  upcoming: Appointment[];
+  past: Appointment[];
+}
+
 export async function signup(
   email: string,
   password: string
@@ -172,4 +188,54 @@ export async function getAvailableSlots(
     throw new Error("Failed to fetch available slots");
   }
   return res.json();
+}
+
+export async function bookAppointment(params: {
+  provider_id: number;
+  start_time: string;
+  end_time: string;
+  notes?: string;
+}): Promise<Appointment> {
+  const res = await fetch(`${API_URL}/appointments`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    credentials: "include",
+    body: JSON.stringify(params),
+  });
+
+  const data = await res.json();
+
+  if (!res.ok) {
+    throw new Error(data.error || "Failed to book appointment");
+  }
+
+  return data;
+}
+
+export async function getAppointments(): Promise<AppointmentsResponse> {
+  const res = await fetch(`${API_URL}/appointments`, {
+    credentials: "include", 
+  });
+
+  if (!res.ok) {
+    throw new Error("Failed to fetch appointments"); 
+  }
+
+  return res.json();
+}
+
+export async function cancelAppointment(id: number): Promise<Appointment> {
+  const res = await fetch(`${API_URL}/appointments/${id}/cancel`, {
+    method: "PATCH",
+    headers: { "Content-Type": "application/json" },
+    credentials: "include",
+  });
+
+  const data = await res.json();
+
+  if (!res.ok) {
+    throw new Error(data.error || "Failed to cancel appointment");
+  }
+
+  return data.appointment || data;
 }

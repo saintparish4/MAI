@@ -1,6 +1,14 @@
 puts " Seeding providers..."
 
+# Clear all data and reset auto-increment counters
+Appointment.destroy_all
+Availability.destroy_all
 Provider.destroy_all
+
+# Reset SQLite auto-increment counters
+ActiveRecord::Base.connection.execute("DELETE FROM sqlite_sequence WHERE name='providers'")
+ActiveRecord::Base.connection.execute("DELETE FROM sqlite_sequence WHERE name='availabilities'")
+ActiveRecord::Base.connection.execute("DELETE FROM sqlite_sequence WHERE name='appointments'")
 
 providers_data = [
   {

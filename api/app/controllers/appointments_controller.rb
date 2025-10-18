@@ -46,6 +46,11 @@ class AppointmentsController < ApplicationController
                 include: {
                     provider: { only: [:id, :name, :specialty, :avatar_url, :location] }
                 }
+            ),
+            past: past.as_json(
+                include: {
+                    provider: { only: [:id, :name, :specialty, :avatar_url, :location] }
+                }
             )
         }
     end
