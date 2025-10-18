@@ -10,7 +10,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_10_17_070001) do
+ActiveRecord::Schema[8.0].define(version: 2025_10_18_032751) do
+  create_table "appointments", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "provider_id", null: false
+    t.datetime "start_time", null: false
+    t.datetime "end_time", null: false
+    t.string "status", default: "pending", null: false
+    t.text "notes"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["provider_id", "start_time"], name: "index_appointments_on_provider_id_and_start_time"
+    t.index ["provider_id"], name: "index_appointments_on_provider_id"
+    t.index ["status"], name: "index_appointments_on_status"
+    t.index ["user_id", "start_time"], name: "index_appointments_on_user_id_and_start_time"
+    t.index ["user_id"], name: "index_appointments_on_user_id"
+  end
+
   create_table "availabilities", force: :cascade do |t|
     t.integer "provider_id", null: false
     t.integer "day_of_week", null: false
@@ -45,5 +61,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_10_17_070001) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "appointments", "providers"
+  add_foreign_key "appointments", "users"
   add_foreign_key "availabilities", "providers"
 end

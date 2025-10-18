@@ -1,27 +1,44 @@
-# Harmony Health - 4 Week Build
+# Mai Health - Layer-Based Build
 
-Start Date: October 16, 2025
-Target Completion: November 13, 2025
-
-## Week 1: Authentication + Basic Models
-- [x] Day 1-2: Rails Setup
+## Layer 1: Authentication + Basic Models
+- [X] Rails Setup
   - [X] Create Rails API app
   - [X] Add bcrypt, rack-cors
   - [X] Create User model
   - [X] Signup/login endpoints
-  - [x] Test with Postman
-- [x] Day 3-4: Next.js Setup
+  - [X] Test with Postman
+- [X] Next.js Setup
   - [X] Create Next.js app
-  - [ ] Install Tailwind + shadcn
-  - [x] Login/signup pages
-  - [x] Connect to Rails
-  - [x] Auth working end-to-end
-- [ ] Day 5-7: Provider Models
-  - [x] Create Provider, Availability models
-  - [x] Seed 5 providers
-  - [x] GET /providers endpoint
-  - [x] Browse providers page
+  - [] Install Tailwind + shadcn
+  - [X] Login/signup pages
+  - [X] Connect to Rails
+  - [X] Auth working end-to-end
+- [X] Provider Models
+  - [X] Create Provider, Availability models
+  - [X] Seed 5 providers
+  - [X] GET /providers endpoint
+  - [X] Browse providers page
 
-**Week 1 Goal:** User can sign up, log in, see 5 providers
+**Layer 1 Goal:** User can sign up, log in, see 5 providers
 
-[Copy rest of weeks from the plan above]
+## Layer 2: Appointment Booking System
+
+### Backend:
+- [ ] Appointment model to track bookings
+- [ ] SlotGeneratorService that:
+  - [ ] Generates 30-minute time slots
+  - [ ] Covers next 14 days
+  - [ ] Checks provider availability
+  - [ ] Excludes past times
+  - [ ] Filters out booked slots
+- [ ] Slots endpoint returns slots grouped by date
+
+### Frontend:
+- [ ] Provider detail page with complete profile
+- [ ] Date selector (left sidebar) showing available dates
+- [ ] Time slot picker displaying 30-min slots
+- [ ] Visual feedback - selected slots highlighted in Ruby red
+- [ ] Booking preview showing appointment details
+- [ ] Responsive design that works on mobile
+
+**Layer 2 Goal:** User can book appointments with providers

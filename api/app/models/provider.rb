@@ -1,5 +1,6 @@
 class Provider < ApplicationRecord
     has_many :availabilities, dependent: :destroy 
+    has_many :appointments, dependent: :destroy 
 
     validates :name, presence: true 
     validates :specialty, presence: true 

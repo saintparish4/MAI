@@ -5,5 +5,9 @@ Rails.application.routes.draw do
  get 'auth/me', to: 'auth#me'
  
  # Providers routes
- resources :providers, only: [:index, :show] 
+ resources :providers, only: [:index, :show] do
+    member do 
+        get 'available_slots', to: 'slots#available_slots'
+    end
+  end
 end
