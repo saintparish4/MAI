@@ -17,10 +17,10 @@ Target Completion: November 13, 2025
   - [x] Connect to Rails
   - [x] Auth working end-to-end
 - [ ] Day 5-7: Provider Models
-  - [ ] Create Provider, Availability models
-  - [ ] Seed 5 providers
-  - [ ] GET /providers endpoint
-  - [ ] Browse providers page
+  - [x] Create Provider, Availability models
+  - [x] Seed 5 providers
+  - [x] GET /providers endpoint
+  - [x] Browse providers page
 
 **Week 1 Goal:** User can sign up, log in, see 5 providers
 
