@@ -3,6 +3,8 @@
 import { useAuth } from '@/lib/authContext'; // CONFIGURE AUTH CONTEXT HERE
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
+import Image from 'next/image';
+import Link from 'next/link';
 
 export default function ProtectedLayout({
   children,
@@ -36,30 +38,32 @@ export default function ProtectedLayout({
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <div className="flex items-center space-x-8">
-              <img 
+              <Image 
                 src="/favicon.ico" 
                 alt="App Logo" 
+                width={32}
+                height={32}
                 className="h-8 w-8"
               />
               <nav className="flex space-x-6">
-                <a 
+                <Link 
                   href="/dashboard" 
                   className="text-gray-600 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium transition-colors"
                 >
                   Dashboard
-                </a>
-                <a 
+                </Link>
+                <Link 
                   href="/providers" 
                   className="text-gray-600 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium transition-colors"
                 >
                   Browse Providers
-                </a>
-                <a 
+                </Link>
+                <Link 
                   href="/appointments" 
                   className="text-gray-600 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium transition-colors"
                 >
                   My Appointments
-                </a>
+                </Link>
               </nav>
             </div>
             <div className="flex items-center space-x-4">

@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import { getProvider, getAvailableSlots, bookAppointment, Provider, TimeSlot, AvailableSlotsResponse } from '@/lib/api';
 
@@ -22,11 +22,7 @@ export default function ProviderDetailPage() {
   const [bookingError, setBookingError] = useState('');
   const [bookingSuccess, setBookingSuccess] = useState(false);
 
-  useEffect(() => {
-    loadProviderData();
-  }, [providerId]);
-
-  const loadProviderData = async () => {
+  const loadProviderData = useCallback(async () => {
     setLoading(true);
     try {
       const [providerData, slotsResponse] = await Promise.all([
@@ -46,7 +42,11 @@ export default function ProviderDetailPage() {
     } finally {
       setLoading(false);
     }
-  };
+  }, [providerId]);
+
+  useEffect(() => {
+    loadProviderData();
+  }, [loadProviderData]);
 
   const handleBookingClick = () => {
     if (selectedSlot) {
@@ -74,8 +74,8 @@ export default function ProviderDetailPage() {
       // Reload slots to remove booked slot
       const slotsResponse = await getAvailableSlots(providerId);
       setSlotsData(slotsResponse);
-    } catch (error: any) {
-      setBookingError(error.message || 'Failed to book appointment');
+    } catch (error: unknown) {
+      setBookingError(error instanceof Error ? error.message : 'Failed to book appointment');
       setBooking(false);
     }
   };

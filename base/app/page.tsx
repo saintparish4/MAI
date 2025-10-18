@@ -38,7 +38,7 @@ export default function Home() {
             Harmony Health
           </h1>
           <p className="text-lg text-gray-600 dark:text-gray-300 italic">
-            "Finally, healthcare scheduling that actually works for everyone"
+            &quot;Finally, healthcare scheduling that actually works for everyone&quot;
           </p>
         </div>
         <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">

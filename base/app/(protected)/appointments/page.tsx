@@ -38,9 +38,9 @@ export default function AppointmentsPage() {
       await cancelAppointment(id);
       console.log('Appointment cancelled successfully');
       await loadAppointments();
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error('Error cancelling appointment:', error);
-      alert(error.message || 'Failed to cancel appointment');
+      alert(error instanceof Error ? error.message : 'Failed to cancel appointment');
     } finally {
       setCancelling(null);
     }
