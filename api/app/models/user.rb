@@ -1,6 +1,6 @@
 class User < ApplicationRecord
     has_secure_password
-    has_many :appointments, dependent: :destroy 
+    has_many :appointments, foreign_key: 'patient_id', dependent: :destroy 
 
     validates :email, presence: true, uniqueness: true
     validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }
