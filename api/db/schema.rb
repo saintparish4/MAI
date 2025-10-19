@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_10_18_175934) do
+ActiveRecord::Schema[8.0].define(version: 2025_10_19_173830) do
   create_table "appointments", force: :cascade do |t|
     t.integer "patient_id", null: false
     t.integer "provider_id", null: false
@@ -59,6 +59,9 @@ ActiveRecord::Schema[8.0].define(version: 2025_10_18_175934) do
     t.string "password_digest"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "booking_confirmations", default: true
+    t.boolean "reminders_24h", default: true
+    t.boolean "cancellation_notices", default: true
   end
 
   add_foreign_key "appointments", "providers"

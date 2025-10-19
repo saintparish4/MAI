@@ -7,7 +7,7 @@ class Appointment < ApplicationRecord
   validates :status, inclusion: { in: %w[pending confirmed cancelled completed] }
 
   validate :end_time_after_start_time
-  validate :not_overlapping_appointments
+  validate :no_overlapping_appointments
   validate :not_in_the_past
 
   scope :upcoming, -> { where('start_time >= ?', Time.current).order(:start_time) }
@@ -17,7 +17,7 @@ class Appointment < ApplicationRecord
   scope :confirmed, -> { where(status: 'confirmed') }
   scope :active, -> { where(status: %w[pending confirmed]) }
 
-  after_create :send_confirmation_email
+  after_create :send_booking_notifications
 
   def duration_in_minutes
     ((end_time - start_time) / 60).to_i
@@ -45,21 +45,20 @@ class Appointment < ApplicationRecord
     end
   end
 
-  def not_overlapping_appointments
+  def no_overlapping_appointments
     return if start_time.blank? || end_time.blank?
 
     overlapping = Appointment.where(provider_id: provider_id)
                              .where.not(id: id)
-                             .where.not(status: 'cancelled')
+                             .where(status: %w[pending confirmed])
                              .where('start_time < ? AND end_time > ?', end_time, start_time)
     
     if overlapping.exists?
-      errors.add(:base, "This time slot overlaps with an existing appointment")
+      errors.add(:base, "This time slot is no longer available")
     end
   end
 
-  def send_confirmation_email
-    # TODO: Implement email notifications
-    Rails.logger.info "Appointment created: #{id} for patient #{patient_id} with provider #{provider_id}"
+  def send_booking_notifications
+    NotificationService.send_booking_notifications(self)
   end
 end

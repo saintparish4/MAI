@@ -78,8 +78,9 @@ class AppointmentsController < ApplicationController
         end
 
         if appointment.update(status: 'cancelled')
+            NotificationService.send_cancellation_notifications(appointment, 'patient')
             render json: {
-                message: 'Appointment cancelled successfully!',
+                message: 'Appointment cancelled successfully',
                 appointment: appointment 
             }
         else 

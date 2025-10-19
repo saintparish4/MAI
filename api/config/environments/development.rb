@@ -36,7 +36,20 @@ Rails.application.configure do
   config.action_mailer.perform_caching = false
 
   # Set localhost to be used by links generated in mailer templates.
-  config.action_mailer.default_url_options = { host: "localhost", port: 3001 }
+  config.action_mailer.default_url_options = { host: "localhost:3001" }
+
+  # Configure SendGrid SMTP settings
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    address: "smtp.sendgrid.net",
+    port: 587,
+    domain: "yourdomain.com",
+    user_name: "apikey",
+    password: ENV["SENDGRID_API_KEY"],
+    authentication: "plain",
+    enable_starttls_auto: true
+  }
+  config.action_mailer.perform_deliveries = true
 
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log
