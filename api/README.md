@@ -1,24 +1,43 @@
-# README
+# Harmony Health API
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Medical appointment coordination platform backend.
 
-Things you may want to cover:
+**🌐 Live Demo:** https://harmony-health-client.vercel.app
 
-* Ruby version
+## Overview
+Full-stack appointment booking system enabling patients to discover healthcare providers and schedule appointments.
 
-* System dependencies
+## Tech Stack
+- Ruby on Rails 7.2 (API mode)
+- PostgreSQL
+- JWT authentication
+- Service-oriented architecture
 
-* Configuration
+## Key Features
+- User authentication (patients & providers)
+- Dynamic appointment slot generation
+- Conflict detection and validation
+- RESTful API design
 
-* Database creation
+## Architecture Highlights
+- `SlotGeneratorService` - Generates available time slots based on provider availability
+- Time overlap detection prevents double-booking
+- Status-aware appointment queries
 
-* Database initialization
+## Setup
+```bash
+bundle install
+rails db:create db:migrate db:seed
+rails server
+```
 
-* How to run the test suite
+## API Endpoints
+- `POST /auth/signup` - User registration
+- `POST /auth/login` - User authentication
+- `GET /providers` - List all providers
+- `GET /providers/:id/available_slots` - Get available appointment slots
+- `POST /appointments` - Book appointment
+- `GET /appointments` - List user's appointments
 
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+## Portfolio Project
+This is a demonstration project showcasing full-stack development skills. Provider data is fictional for demo purposes.
