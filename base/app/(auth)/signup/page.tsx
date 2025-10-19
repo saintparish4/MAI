@@ -70,7 +70,7 @@ export default function SignupPage() {
                 required
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-[#CC342D] focus:border-[#CC342D] transition-colors"
+                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-[#CC342D] focus:border-[#CC342D] transition-colors text-black"
                 placeholder="you@example.com"
               />
             </div>
@@ -85,7 +85,7 @@ export default function SignupPage() {
                 required
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-[#CC342D] focus:border-[#CC342D] transition-colors"
+                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-[#CC342D] focus:border-[#CC342D] transition-colors text-black"
                 placeholder="••••••••"
               />
             </div>
@@ -100,7 +100,7 @@ export default function SignupPage() {
                 required
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
-                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-[#CC342D] focus:border-[#CC342D] transition-colors"
+                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-[#CC342D] focus:border-[#CC342D] transition-colors text-black"
                 placeholder="••••••••"
               />
             </div>

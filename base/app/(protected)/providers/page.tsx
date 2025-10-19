@@ -61,7 +61,7 @@ export default function ProvidersPage() {
               <select
                 value={specialty}
                 onChange={(e) => setSpecialty(e.target.value === 'All Specialties' ? '' : e.target.value)}
-                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#CC342D] focus:border-transparent"
+                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#CC342D] focus:border-transparent text-black"
               >
                 {specialties.map((spec) => (
                   <option key={spec} value={spec}>
@@ -78,7 +78,7 @@ export default function ProvidersPage() {
               <select
                 value={sortBy}
                 onChange={(e) => setSortBy(e.target.value)}
-                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#CC342D] focus:border-transparent"
+                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#CC342D] focus:border-transparent text-black"
               >
                 <option value="">Most Recent</option>
                 <option value="rating_desc">Highest Rated</option>

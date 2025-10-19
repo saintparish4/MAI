@@ -181,7 +181,7 @@ export default function ProviderDetailPage() {
             <div className="grid md:grid-cols-3 gap-6">
               {/* Date Selector */}
               <div className="md:col-span-1">
-                <h3 className="text-lg font-semibold mb-4">
+                <h3 className="text-lg font-semibold mb-4 text-black">
                   Select a Date
                 </h3>
                 <div className="space-y-2">
@@ -200,7 +200,7 @@ export default function ProviderDetailPage() {
                             : 'border-gray-200 hover:border-gray-300'
                         }`}
                       >
-                        <div className="font-semibold">
+                        <div className="font-semibold text-black">
                           {formatDate(date)}
                         </div>
                         <div className="text-sm text-gray-600">
@@ -214,7 +214,7 @@ export default function ProviderDetailPage() {
 
               {/* Time Slots */}
               <div className="md:col-span-2">
-                <h3 className="text-lg font-semibold mb-4">
+                <h3 className="text-lg font-semibold mb-4 text-black">
                   Available Times for {selectedDate ? formatDate(selectedDate) : '...'}
                 </h3>
                 <div>
@@ -231,7 +231,7 @@ export default function ProviderDetailPage() {
                         className={`px-4 py-3 rounded-lg border-2 font-semibold transition-all ${
                           selectedSlot === slot
                             ? 'border-[#CC342D] bg-[#CC342D] text-white'
-                            : 'border-gray-300 hover:border-[#CC342D] hover:bg-[#CC342D] hover:bg-opacity-10'
+                            : 'border-gray-300 hover:border-[#CC342D] hover:bg-[#CC342D] hover:bg-opacity-10 text-black'
                         }`}
                       >
                         {slot.time}
@@ -243,16 +243,16 @@ export default function ProviderDetailPage() {
                 {/* Booking Preview */}
                 {selectedSlot && (
                   <div className="mt-6 p-4 bg-gray-50 rounded-lg border-2 border-[#CC342D]">
-                    <h4 className="font-semibold text-lg mb-3">
+                    <h4 className="font-semibold text-lg mb-3 text-black">
                       Selected Appointment
                     </h4>
-                    <p className="text-sm text-gray-700 mb-2">
+                    <p className="text-sm text-black mb-2">
                       <strong>Date:</strong> {formatDate(selectedSlot.date)}
                     </p>
-                    <p className="text-sm text-gray-700 mb-2">
+                    <p className="text-sm text-black mb-2">
                       <strong>Time:</strong> {selectedSlot.time}
                     </p>
-                    <p className="text-sm text-gray-700 mb-4">
+                    <p className="text-sm text-black mb-4">
                       <strong>Duration:</strong> 30 minutes
                     </p>
                     <button onClick={handleBookingClick} className="w-full bg-[#CC342D] text-white py-3 rounded-lg font-semibold hover:bg-[#a82a24] transition">
@@ -282,7 +282,7 @@ export default function ProviderDetailPage() {
                       </svg>
                     </div>
                   </div>
-                  <h2 className="text-2xl font-bold text-center mb-2">
+                  <h2 className="text-2xl font-bold text-center mb-2 text-black">
                     Booking Confirmed!
                   </h2>
                   <p className="text-gray-600 text-center mb-6">
@@ -291,17 +291,17 @@ export default function ProviderDetailPage() {
                   <div className="space-y-4 mb-6">
                   <div className="border-b pb-3">
                     <p className="text-sm text-gray-500">Provider</p>
-                    <p className="font-semibold">{provider.name}</p>
+                    <p className="font-semibold text-black">{provider.name}</p>
                     </div>
                     <div className="border-b pb-3">
                     <p className="text-sm text-gray-500">Date & Time</p>
-                    <p className="font-semibold">
+                    <p className="font-semibold text-black">
                       {formatDate(selectedSlot.date)} at {selectedSlot.time}
                     </p>
                     </div>
                     <div className="border-b pb-3">
                     <p className="text-sm text-gray-500">Duration</p>
-                    <p className="font-semibold">30 minutes</p>
+                    <p className="font-semibold text-black">30 minutes</p>
                     </div>
                   </div>
                   <button onClick={handleCloseModal} className="w-full bg-[#CC342D] text-white py-3 rounded-lg font-semibold hover:bg-[#a82a24] transition">
@@ -313,35 +313,35 @@ export default function ProviderDetailPage() {
               <>
                 {/* Booking Form */}
                 <div className="p-6">
-                  <h2 className="text-2xl font-bold mb-6">
+                  <h2 className="text-2xl font-bold mb-6 text-black">
                   Confirm Booking
                 </h2>
                 <div className="space-y-4">
                   <div className="flex items-center gap-3 pb-4 border-b">
                     <div className="w-12 h-12 bg-gray-200 rounded-full flex-shrink-0"></div>
                     <div>
-                      <p className="font-semibold">{provider.name}</p>
+                      <p className="font-semibold text-black">{provider.name}</p>
                       <p className="text-sm text-gray-600">{provider.specialty}</p>
                     </div>
                   </div>
                   <div className="bg-gray-50 p-4 rounded-lg">
-                  <h3 className="font-semibold mb-2">
+                  <h3 className="font-semibold mb-2 text-black">
                     Appointment Details
                     </h3>
-                    <p className="text-sm mb-1">
+                    <p className="text-sm mb-1 text-black">
                       {formatDate(selectedSlot.date)} at {selectedSlot.time}
                     </p>
                     <p className="text-sm text-gray-600">Duration: 30 minutes</p>
                   </div>
                   <div>
-                    <label className="block text-sm font-medium mb-2">
+                    <label className="block text-sm font-medium mb-2 text-black">
                       Notes (Optional)
                     </label>
                     <textarea
                       value={notes}
                       onChange={(e) => setNotes(e.target.value)}
                       rows={3}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#CC342D] focus:border-transparent"
+                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#CC342D] focus:border-transparent text-black"
                       placeholder="Any special requests or information..."
                     />
                   </div>
@@ -351,7 +351,7 @@ export default function ProviderDetailPage() {
                     </div>
                   )}
                   <div className="flex justify-between items-center pt-4 border-t">
-                    <span className="font-semibold">Total</span>
+                    <span className="font-semibold text-black">Total</span>
                     <span className="text-2xl font-bold text-[#CC342D]">
                       ${parseFloat(provider.hourly_rate.toString()).toFixed(0)}
                     </span>
