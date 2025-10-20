@@ -38,18 +38,22 @@ Rails.application.configure do
   # Set localhost to be used by links generated in mailer templates.
   config.action_mailer.default_url_options = { host: "localhost:3001" }
 
-  # Configure SendGrid SMTP settings
-  config.action_mailer.delivery_method = :smtp
-  config.action_mailer.smtp_settings = {
-    address: "smtp.sendgrid.net",
-    port: 587,
-    domain: "yourdomain.com",
-    user_name: "apikey",
-    password: ENV["SENDGRID_API_KEY"],
-    authentication: "plain",
-    enable_starttls_auto: true
-  }
+  # For development: log emails instead of sending them
+  # This allows you to see email content in the console without SendGrid
+  config.action_mailer.delivery_method = :logger
   config.action_mailer.perform_deliveries = true
+  
+  # Uncomment below and add ENV["SENDGRID_API_KEY"] when ready to test with SendGrid
+  # config.action_mailer.delivery_method = :smtp
+  # config.action_mailer.smtp_settings = {
+  #   address: "smtp.sendgrid.net",
+  #   port: 587,
+  #   domain: "yourdomain.com",
+  #   user_name: "apikey",
+  #   password: ENV["SENDGRID_API_KEY"],
+  #   authentication: "plain",
+  #   enable_starttls_auto: true
+  # }
 
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log

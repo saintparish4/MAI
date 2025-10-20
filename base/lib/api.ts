@@ -273,13 +273,27 @@ export async function bookAppointment(params: {
     body: JSON.stringify(params),
   });
 
-  const data = await res.json();
+  // Check if response has content before parsing
+  const contentType = res.headers.get("content-type");
+  let data;
+  
+  if (contentType && contentType.includes("application/json")) {
+    try {
+      data = await res.json();
+    } catch (e) {
+      throw new Error("Server returned invalid JSON response");
+    }
+  } else {
+    // If not JSON, try to get text for error message
+    const text = await res.text();
+    data = { error: text || "Server error" };
+  }
 
   if (!res.ok) {
     throw new Error(data.error || "Failed to book appointment");
   }
 
-  return data;
+  return data.appointment || data;
 }
 
 export async function getAppointments(): Promise<AppointmentsResponse> {

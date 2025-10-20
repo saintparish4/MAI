@@ -1,11 +1,21 @@
 class NotificationService
-    def self.send_booking_notification(appointment)
-        AppointmentMailer.booking_confirmation(appointment).deliver_later
-        AppointmentMailer.provider_notification(appointment).deliver_later
+    def self.send_booking_notifications(appointment)
+        # Send booking confirmation to patient
+        mailer = AppointmentMailer.booking_confirmation(appointment)
+        mailer&.deliver_later
+        
+        # Provider notification is disabled for now
+        AppointmentMailer.provider_notification(appointment)
+    rescue => e
+        Rails.logger.error("Failed to send booking notifications: #{e.message}")
+        # Don't raise - we don't want email failures to block appointment creation
     end
 
-    def self.send_cancellation_notification(appointment, cancelled_by)
-        AppointmentMailer.cancellation_notice(appointment, cancelled_by).deliver_later
+    def self.send_cancellation_notifications(appointment, cancelled_by)
+        mailer = AppointmentMailer.cancellation_notice(appointment, cancelled_by)
+        mailer&.deliver_later
+    rescue => e
+        Rails.logger.error("Failed to send cancellation notifications: #{e.message}")
     end
 
     def self.send_reminder_notifications

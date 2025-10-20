@@ -13,16 +13,9 @@ class AppointmentMailer < ApplicationMailer
   end
 
   def provider_notification(appointment)
-    @appointment = appointment
-    @patient = appointment.patient
-    @provider = appointment.provider
-
     # In real app, provider would have email
     # For now, we'll skip provider email
-    # mail(
-    #   to: @provider.email,
-    #   subject: "New Appointment Request - #{@patient.name}"
-    # )
+    # Skip sending email for now
   end
 
   def cancellation_notice(appointment, cancelled_by)
