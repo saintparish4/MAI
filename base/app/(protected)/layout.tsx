@@ -64,6 +64,12 @@ export default function ProtectedLayout({
                 >
                   My Appointments
                 </Link>
+                <Link 
+                  href="/settings" 
+                  className="text-gray-600 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium transition-colors"
+                >
+                  Settings
+                </Link>
               </nav>
             </div>
             <div className="flex items-center space-x-4">
