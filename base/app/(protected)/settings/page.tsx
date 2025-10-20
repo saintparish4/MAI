@@ -31,8 +31,8 @@ export default function SettingsPage() {
         cancellation_notices: cancellationNotices
       });
       setMessage('Preferences saved successfully!');
-    } catch (error: any) {
-      setMessage(error.message || 'Failed to save preferences');
+    } catch (error) {
+      setMessage(error instanceof Error ? error.message : 'Failed to save preferences');
     } finally {
       setSaving(false);
     }
