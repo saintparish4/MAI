@@ -48,9 +48,25 @@ class AuthController < ApplicationController
       render json: { user: current_user.as_json(only: [:id, :email]) }
     end
     
+    # PATCH /auth/preferences
+    def update_preferences
+      if current_user.update(preference_params)
+        render json: {
+          message: 'Preferences updated successfully',
+          user: current_user.as_json(only: [:id, :email, :booking_confirmations, :reminders_24h, :cancellation_notices])
+        }
+      else
+        render json: { errors: current_user.errors.full_messages }, status: :unprocessable_entity
+      end
+    end
+    
     private
     
     def user_params
       params.permit(:email, :password, :password_confirmation)
+    end
+    
+    def preference_params
+      params.permit(:booking_confirmations, :reminders_24h, :cancellation_notices)
     end
   end

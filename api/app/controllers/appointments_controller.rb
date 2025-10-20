@@ -73,15 +73,29 @@ class AppointmentsController < ApplicationController
     def cancel
         appointment = current_user.appointments.find(params[:id])
 
+        if appointment.status == 'cancelled'
+            return render json: { error: 'Appointment is already cancelled' }, status: :unprocessable_entity
+        end
+
         if appointment.start_time < Time.current
             return render json: { error: 'Cannot cancel past appointments' }, status: :unprocessable_entity
         end
 
         if appointment.update(status: 'cancelled')
-            NotificationService.send_cancellation_notifications(appointment, 'patient')
+            begin
+                NotificationService.send_cancellation_notifications(appointment, 'patient')
+            rescue => e
+                Rails.logger.error("Failed to send cancellation notifications: #{e.message}")
+                # Continue even if notification fails - appointment is already cancelled
+            end
+            
             render json: {
                 message: 'Appointment cancelled successfully',
-                appointment: appointment 
+                appointment: appointment.as_json(
+                    include: {
+                        provider: { only: [:id, :name, :specialty, :avatar_url, :location] }
+                    }
+                )
             }
         else 
             render json: { error: 'Failed to cancel appointment' }, status: :unprocessable_entity

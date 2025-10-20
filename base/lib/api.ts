@@ -21,6 +21,9 @@ export function removeToken(): void {
 export interface User {
   id: number;
   email: string;
+  booking_confirmations?: boolean;
+  reminders_24h?: boolean;
+  cancellation_notices?: boolean;
 }
 
 export interface AuthResponse {
@@ -318,4 +321,32 @@ export async function cancelAppointment(id: number): Promise<Appointment> {
   }
 
   return data.appointment || data;
+}
+
+export async function updateEmailPreferences(preferences: {
+  booking_confirmations?: boolean;
+  reminders_24h?: boolean;
+  cancellation_notices?: boolean;
+}): Promise<{ message: string }> {
+  const token = getToken();
+  const headers: HeadersInit = {
+    "Content-Type": "application/json",
+  };
+  if (token) {
+    headers["Authorization"] = `Bearer ${token}`;
+  }
+
+  const res = await fetch(`${API_URL}/auth/update_preferences`, {
+    method: "PATCH",
+    headers,
+    body: JSON.stringify(preferences),
+  });
+
+  const data = await res.json();
+
+  if (!res.ok) {
+    throw new Error(data.error || "Failed to update preferences");
+  }
+
+  return data;
 }

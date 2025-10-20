@@ -4,6 +4,7 @@ Rails.application.routes.draw do
  post 'auth/login', to: 'auth#login'
  delete 'auth/logout', to: 'auth#logout'
  get 'auth/me', to: 'auth#me'
+ patch 'auth/update_preferences', to: 'auth#update_preferences'
  
  # Providers routes
  resources :providers, only: [:index, :show] do
