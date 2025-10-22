@@ -57,15 +57,15 @@ Rails.application.configure do
   # Set host to be used by links generated in mailer templates.
   config.action_mailer.default_url_options = { host: 'mai-omega.vercel.app' }
 
-  # Configure SendGrid SMTP for email delivery
+  # Configure Resend SMTP for email delivery
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.perform_deliveries = true
   config.action_mailer.smtp_settings = {
-    address: 'smtp.sendgrid.net',
+    address: 'smtp.resend.com',
     port: 587,
     domain: 'mai-omega.vercel.app',
-    user_name: 'apikey',
-    password: ENV['SENDGRID_API_KEY'],
+    user_name: 'resend',
+    password: ENV['RESEND_API_KEY'],
     authentication: 'plain',
     enable_starttls_auto: true
   }

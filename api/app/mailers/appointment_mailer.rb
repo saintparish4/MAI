@@ -13,9 +13,14 @@ class AppointmentMailer < ApplicationMailer
   end
 
   def provider_notification(appointment)
-    # In real app, provider would have email
-    # For now, we'll skip provider email
-    # Skip sending email for now
+    @appointment = appointment
+    @patient = appointment.patient
+    @provider = appointment.provider
+
+    # In a real app, provider would have an email field
+    # For now, send to a placeholder or skip
+    # Returning without calling mail() will return nil
+    return
   end
 
   def cancellation_notice(appointment, cancelled_by)

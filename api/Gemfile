@@ -13,7 +13,7 @@ gem "puma", ">= 5.0"
 gem "bcrypt"
 gem "rack-cors"
 gem "jwt"
-gem "sendgrid-ruby"
+gem "resend"
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem "tzinfo-data", platforms: %i[ windows jruby ]
@@ -47,6 +47,9 @@ group :development, :test do
 
   # Omakase Ruby styling [https://github.com/rails/rubocop-rails-omakase/]
   gem "rubocop-rails-omakase", require: false
+
+  # Load environment variables from .env file
+  gem "dotenv-rails"
 
   # Testing framework
   gem "rspec-rails", '~> 8.0.0'

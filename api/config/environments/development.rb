@@ -39,18 +39,18 @@ Rails.application.configure do
   config.action_mailer.default_url_options = { host: "localhost:3001" }
 
   # For development: log emails instead of sending them
-  # This allows you to see email content in the console without SendGrid
+  # This allows you to see email content in the console without Resend
   config.action_mailer.delivery_method = :logger
   config.action_mailer.perform_deliveries = true
   
-  # Uncomment below and add ENV["SENDGRID_API_KEY"] when ready to test with SendGrid
+  # Uncomment below and add ENV["RESEND_API_KEY"] when ready to test with Resend
   # config.action_mailer.delivery_method = :smtp
   # config.action_mailer.smtp_settings = {
-  #   address: "smtp.sendgrid.net",
+  #   address: "smtp.resend.com",
   #   port: 587,
-  #   domain: "yourdomain.com",
-  #   user_name: "apikey",
-  #   password: ENV["SENDGRID_API_KEY"],
+  #   domain: "localhost",
+  #   user_name: "resend",
+  #   password: ENV["RESEND_API_KEY"],
   #   authentication: "plain",
   #   enable_starttls_auto: true
   # }

@@ -34,8 +34,8 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <div className="flex-shrink-0 flex items-center gap-2">
-              <img src="/favicon.ico" alt="Mai Logo" className="w-8 h-8" />
-              <h1 className="text-2xl font-bold text-[#CC342D]">Mai</h1>
+              <img src="/favicon.ico" alt="Sana Logo" className="w-8 h-8" />
+              <h1 className="text-2xl font-bold text-[#CC342D]">Sana</h1>
             </div>
             <div className="flex items-center gap-6">
               <div className="hidden md:flex items-center space-x-6">
@@ -55,7 +55,7 @@ export default function Home() {
                   href="#"
                   className="text-gray-700 hover:text-[#CC342D] font-medium"
                 >
-                  List your practice on Mai
+                  List your practice on Sana Health
                 </Link>
               </div>
               <span className="hidden md:inline text-gray-300">|</span>
@@ -154,7 +154,7 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold text-gray-900 mb-4">
-              Why choose Mai?
+              Why choose Sana?
             </h2>
             <p className="text-xl text-gray-600">
               Healthcare made simple, accessible, and convenient
@@ -309,7 +309,7 @@ export default function Home() {
             Ready to take control of your health?
           </h2>
           <p className="text-xl text-white text-opacity-90 mb-8">
-            Join thousands of patients who trust Mai for their healthcare needs
+            Join thousands of patients who trust Sana Health for their healthcare needs
           </p>
           <Link
             href="/signup"
@@ -325,7 +325,7 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
             <div>
-              <h3 className="text-xl font-bold text-[#EE6C4D] mb-4">Mai Health</h3>
+              <h3 className="text-xl font-bold text-[#EE6C4D] mb-4">Sana Health</h3>
               <p className="text-gray-400">
                 Making healthcare accessible and convenient for everyone.
               </p>
@@ -356,7 +356,7 @@ export default function Home() {
             </div>
           </div>
           <div className="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
-            <p>&copy; 2025 Mai Health. All rights reserved.</p>
+            <p>&copy; 2025 Sana Health. All rights reserved.</p>
           </div>
         </div>
       </footer>

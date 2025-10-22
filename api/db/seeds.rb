@@ -1,14 +1,30 @@
-puts " Seeding providers..."
+puts "🌱 Seeding database..."
 
 # Clear all data and reset auto-increment counters
 Appointment.destroy_all
 Availability.destroy_all
 Provider.destroy_all
+User.destroy_all
 
 # Reset SQLite auto-increment counters
 ActiveRecord::Base.connection.execute("DELETE FROM sqlite_sequence WHERE name='providers'")
 ActiveRecord::Base.connection.execute("DELETE FROM sqlite_sequence WHERE name='availabilities'")
 ActiveRecord::Base.connection.execute("DELETE FROM sqlite_sequence WHERE name='appointments'")
+ActiveRecord::Base.connection.execute("DELETE FROM sqlite_sequence WHERE name='users'")
+
+# Create test user
+puts "👤 Creating test user..."
+test_user = User.create!(
+  email: 'saintparish6@gmail.com',
+  password: 'password123',
+  password_confirmation: 'password123',
+  booking_confirmations: true,
+  reminders_24h: true,
+  cancellation_notices: true
+)
+puts "✅ Created test user: #{test_user.email}"
+
+puts "🏥 Seeding providers..."
 
 providers_data = [
   {
@@ -76,7 +92,13 @@ providers_data.each do |provider_data|
     )
   end
   
-  puts " Created provider: #{provider.name}"
+  puts "✅ Created provider: #{provider.name}"
 end
 
-puts " Seeded #{Provider.count} providers with availability!"
+puts "✨ Seeding complete!"
+puts "   📊 #{Provider.count} providers with availability"
+puts "   👤 1 test user (#{test_user.email})"
+puts ""
+puts "🔐 Test Login Credentials:"
+puts "   Email: saintparish6@gmail.com"
+puts "   Password: password123"

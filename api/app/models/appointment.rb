@@ -59,6 +59,8 @@ class Appointment < ApplicationRecord
   end
 
   def send_booking_notifications
+    # Reload to ensure associations are loaded
+    reload
     NotificationService.send_booking_notifications(self)
   end
 end

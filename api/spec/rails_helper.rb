@@ -13,13 +13,22 @@ rescue ActiveRecord::PendingMigrationError => e
 end
 
 RSpec.configure do |config|
-  config.fixture_path = "#{::Rails.root}/test/fixtures"
   config.use_transactional_fixtures = true
   config.infer_spec_type_from_file_location!
   config.filter_rails_from_backtrace!
 
   # Factory Bot
   config.include FactoryBot::Syntax::Methods
+  
+  # ActiveJob test helpers
+  config.include ActiveJob::TestHelper
+  
+  # Clear enqueued jobs before and after each test
+  config.around(:each) do |example|
+    clear_enqueued_jobs
+    example.run
+    clear_enqueued_jobs
+  end
 end
 
 # Shoulda Matchers
