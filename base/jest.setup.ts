@@ -6,7 +6,7 @@ global.fetch = jest.fn(() =>
   Promise.resolve({
     ok: true,
     json: () => Promise.resolve({ message: 'Success' }),
-  })
+  } as Response)
 )
 
 // Mock Next.js navigation module globally
@@ -23,3 +23,4 @@ jest.mock('next/navigation', () => ({
   useSearchParams: () => new URLSearchParams(),
   useParams: () => ({}),
 }))
+
