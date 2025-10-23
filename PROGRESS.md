@@ -42,3 +42,4 @@
 - [X] Responsive design that works on mobile
 
 **Layer 2 Goal:** User can book appointments with providers
+- [ ] Need to configure the email service at some point
