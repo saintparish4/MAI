@@ -1,53 +1,74 @@
-## Primary Colors
+Brand Identity Overview
 
-**Ruby Red** (Main Brand Color)
-- HEX: `#CC342D`
-- RGB: `204, 52, 45`
-- Tailwind: `bg-[#CC342D]`
+Brand Name: Nora
+Tagline: “Healthcare that understands you.”
+Tone: Calm, intelligent, human-centered, empathetic.
+Style Keywords: Minimalist, warm, trust-driven, clean typography, intelligent whitespace, approachable gradients.
 
-**Deep Ruby** (Darker variant)
-- HEX: `#9B2226`
-- RGB: `155, 34, 38`
-- Tailwind: `bg-[#9B2226]`
+🎨 Color Palette
 
-## Secondary Colors
+Primary Palette
 
-**Coral** (Accent)
-- HEX: `#EE6C4D`
-- RGB: `238, 108, 77`
-- Tailwind: `bg-[#EE6C4D]`
+Nora Blue — #3A7FD5 → main brand color, calm and clinical but friendly.
 
-**Champagne** (Light accent)
-- HEX: `#F4E8C1`
-- RGB: `244, 232, 193`
-- Tailwind: `bg-[#F4E8C1]`
+Nora White — #FFFFFF → background, creates light and clarity.
 
-## Neutral Colors
+Nora Charcoal — #1E1E1E → text color, contrast for readability.
 
-**Charcoal** (Text)
-- HEX: `#2D3142`
-- RGB: `45, 49, 66`
-- Tailwind: `bg-[#2D3142]`
+Accent Palette
 
-**Slate Gray** (Secondary text)
-- HEX: `#6B7280`
-- RGB: `107, 114, 128`
-- Tailwind: `bg-gray-500`
+Soft Coral — #F47C6B → used for buttons, micro-interactions (warm human accent).
 
-**Light Gray** (Backgrounds)
-- HEX: `#F3F4F6`
-- RGB: `243, 244, 246`
-- Tailwind: `bg-gray-100`
+Mint — #C3E8D3 → soft success state or highlight (reinforces freshness and trust).
 
-**White** (Surfaces)
-- HEX: `#FFFFFF`
-- RGB: `255, 255, 255`
-- Tailwind: `bg-white`
+Slate Gray — #F4F6F8 → light background section contrast.
 
-## Usage Guide
+Emotional Palette
 
-- **Primary Actions:** Ruby Red (#CC342D)
-- **Hover States:** Deep Ruby (#9B2226)
-- **Links & Highlights:** Coral (#EE6C4D)
-- **Backgrounds:** Light Gray (#F3F4F6) & White (#FFFFFF)
-- **Text:** Charcoal (#2D3142) for headings, Slate Gray (#6B7280) for body
+Sky Gradient → linear gradient from #3A7FD5 → #78B8FF (used in CTA sections).
+
+Warm Neutral — #FAFAFA → cards, modals, and secondary backgrounds.
+
+🖋 Typography
+
+Primary Font: Inter — modern, clean, accessible.
+
+Accent Font: Playfair Display — used sparingly in hero headings or taglines for warmth.
+
+Font Scale:
+
+H1: 48px bold
+
+H2: 32px semi-bold
+
+Body: 16px regular
+
+Button: 14px medium uppercase
+
+Motion & Interaction Language
+
+Subtle fade-ins on scroll.
+
+Button hover → soft elevation + color tint.
+
+Gradient transitions for CTAs.
+
+Hero section illustration with gentle parallax on scroll.
+
+🧱 Component Library Tokens (for Design System)
+
+--color-primary: #3A7FD5;
+
+--color-accent: #F47C6B;
+
+--color-bg: #FFFFFF;
+
+--color-surface: #F4F6F8;
+
+--font-primary: 'Inter', sans-serif;
+
+--font-accent: 'Playfair Display', serif;
+
+--radius-card: 12px;
+
+--shadow-card: 0 4px 12px rgba(0,0,0,0.06);
