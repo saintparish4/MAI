@@ -180,7 +180,7 @@ export default function AIMatching() {
             </h2>
             
             <p className="text-xl text-gray-600 leading-relaxed">
-              Describe your symptoms naturally — Nora's AI instantly matches you with the best doctors and verifies insurance in real-time.
+              Describe your symptoms naturally — Nora&apos;s AI instantly matches you with the best doctors and verifies insurance in real-time.
             </p>
 
             {/* Feature List */}

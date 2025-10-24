@@ -152,7 +152,7 @@ export default function Testimonials() {
 
               {/* Quote */}
               <blockquote className="text-2xl md:text-3xl text-gray-700 font-light italic text-center mb-10 leading-relaxed">
-                "{testimonials[currentIndex].quote}"
+                &ldquo;{testimonials[currentIndex].quote}&rdquo;
               </blockquote>
 
               {/* Profile */}

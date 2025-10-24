@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { getProviders, Provider } from '@/lib/api';
 import Link from 'next/link';
 
@@ -10,11 +10,7 @@ export default function ProvidersPage() {
   const [specialty, setSpecialty] = useState('');
   const [sortBy, setSortBy] = useState('');
 
-  useEffect(() => {
-    loadProviders();
-  }, [specialty, sortBy]);
-
-  const loadProviders = async () => {
+  const loadProviders = useCallback(async () => {
     setLoading(true);
     try {
       const data = await getProviders({ 
@@ -27,7 +23,11 @@ export default function ProvidersPage() {
     } finally {
       setLoading(false);
     }
-  };
+  }, [specialty, sortBy]);
+
+  useEffect(() => {
+    loadProviders();
+  }, [loadProviders]);
 
   const specialties = [
     'All Specialties',
