@@ -180,25 +180,25 @@ export default function AIMatching() {
             </h2>
             
             <p className="text-xl text-gray-600 leading-relaxed">
-              Describe your symptoms naturally — Nora&apos;s AI instantly matches you with the best doctors and verifies insurance in real-time.
+              Powered by OpenAI GPT, NORA analyzes your symptoms and intelligently matches you with the most appropriate medical specialists who accept your insurance.
             </p>
 
             {/* Feature List */}
             <div className="space-y-5 pt-4">
               {[
                 {
-                  title: 'Symptom-based matching',
-                  description: 'Natural language processing understands your needs',
+                  title: 'AI symptom analysis',
+                  description: 'OpenAI-powered understanding of your health concerns',
+                  icon: '🤖'
+                },
+                {
+                  title: 'Specialist matching',
+                  description: 'Smart recommendations based on symptoms and provider expertise',
                   icon: '🎯'
                 },
                 {
-                  title: 'Real-time insurance verification',
-                  description: 'Instantly check coverage and out-of-pocket costs',
-                  icon: '✓'
-                },
-                {
-                  title: 'Instant booking',
-                  description: 'Schedule appointments in seconds, not hours',
+                  title: 'Real-time scheduling',
+                  description: 'Live availability with instant booking and automated notifications',
                   icon: '⚡'
                 }
               ].map((feature, index) => (

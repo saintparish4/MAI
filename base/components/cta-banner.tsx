@@ -51,9 +51,9 @@ export default function CtaBanner() {
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.1 }}
           >
-            Healthcare that understands you{' '}
+            Smart healthcare matching{' '}
             <span className="relative inline-block">
-              <span className="relative z-10">starts with Nora</span>
+              <span className="relative z-10">starts with NORA</span>
               <motion.span
                 className="absolute bottom-2 left-0 right-0 h-3 bg-white/30 rounded-full"
                 initial={{ scaleX: 0 }}
@@ -71,7 +71,7 @@ export default function CtaBanner() {
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
-            Join 50,000+ patients who found their perfect healthcare match
+            Join 50,000+ patients experiencing AI-powered symptom analysis and instant specialist booking
           </motion.p>
 
           <motion.div

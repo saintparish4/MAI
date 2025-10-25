@@ -93,7 +93,7 @@ export default function Footer() {
           >
             <h3 className="text-3xl font-light lowercase mb-4 tracking-wide">nora</h3>
             <p className="text-gray-400 leading-relaxed mb-6">
-              AI-powered healthcare matching that puts patients first.
+              AI-powered symptom analysis and smart scheduling that connects patients with the right specialists instantly.
             </p>
             <div className="flex items-center gap-2 text-sm text-gray-500">
               <svg className="w-4 h-4 text-green-500" fill="currentColor" viewBox="0 0 20 20">

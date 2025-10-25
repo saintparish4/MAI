@@ -66,10 +66,10 @@ export default function Header() {
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
-            <NavLink href="/find-doctor">Find a Doctor</NavLink>
-            <NavLink href="/telehealth">Telehealth</NavLink>
+            <NavLink href="/booking/symptoms">Book Appointment</NavLink>
+            <NavLink href="/providers">Find Providers</NavLink>
             <NavLink href="/for-providers">For Providers</NavLink>
-            <NavLink href="/pricing">Pricing</NavLink>
+            <NavLink href="/how-it-works">How It Works</NavLink>
             <NavLink href="/login">Log In</NavLink>
             <Link
               href="/signup"
@@ -97,18 +97,18 @@ export default function Header() {
           <div className="md:hidden">
             <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-white border-t border-gray-100">
               <Link
-                href="/find-doctor"
+                href="/booking/symptoms"
                 className="block px-3 py-2 text-[#1E1E1E] hover:text-[#3A7FD5] transition-colors"
                 onClick={() => setIsMenuOpen(false)}
               >
-                Find a Doctor
+                Book Appointment
               </Link>
               <Link
-                href="/telehealth"
+                href="/providers"
                 className="block px-3 py-2 text-[#1E1E1E] hover:text-[#3A7FD5] transition-colors"
                 onClick={() => setIsMenuOpen(false)}
               >
-                Telehealth
+                Find Providers
               </Link>
               <Link
                 href="/for-providers"
@@ -118,11 +118,11 @@ export default function Header() {
                 For Providers
               </Link>
               <Link
-                href="/pricing"
+                href="/how-it-works"
                 className="block px-3 py-2 text-[#1E1E1E] hover:text-[#3A7FD5] transition-colors"
                 onClick={() => setIsMenuOpen(false)}
               >
-                Pricing
+                How It Works
               </Link>
               <Link
                 href="/login"

@@ -148,8 +148,8 @@ const Hero = () => {
               <motion.p
                 className="text-xl md:text-2xl text-gray-600 leading-relaxed max-w-xl font-light"
               >
-                AI-powered matching connects you with the perfect healthcare provider in minutes.{' '}
-                <span className="text-[#1E1E1E] font-medium">Real availability. Real results.</span>
+                Advanced symptom analysis powered by OpenAI connects you with the right specialist instantly.{' '}
+                <span className="text-[#1E1E1E] font-medium">Real-time availability. Instant booking.</span>
               </motion.p>
             </motion.div>
             
@@ -163,11 +163,11 @@ const Hero = () => {
                 whileTap={{ scale: 0.98 }}
               >
                 <Link
-                  href="/book"
+                  href="/booking/symptoms"
                   className="group relative px-10 py-5 bg-gradient-to-r from-[#F47C6B] to-[#3A7FD5] text-white font-semibold text-lg rounded-xl overflow-hidden shadow-[0_8px_30px_rgba(244,124,107,0.3)] hover:shadow-[0_8px_40px_rgba(244,124,107,0.5)] transition-all duration-300"
                 >
                   <span className="relative z-10 flex items-center gap-2">
-                    Get Started
+                    Book Appointment
                     <motion.span
                       animate={{ x: [0, 4, 0] }}
                       transition={{ duration: 1.5, repeat: Infinity }}
@@ -189,10 +189,10 @@ const Hero = () => {
                 whileTap={{ scale: 0.98 }}
               >
                 <Link
-                  href="/how-it-works"
+                  href="/providers"
                   className="px-10 py-5 bg-white/80 backdrop-blur-sm text-[#1E1E1E] font-semibold text-lg rounded-xl border-2 border-[#3A7FD5]/20 hover:border-[#3A7FD5] hover:bg-white transition-all duration-300 shadow-lg hover:shadow-xl"
                 >
-                  How it works
+                  Browse Providers
                 </Link>
               </motion.div>
             </motion.div>
@@ -248,7 +248,7 @@ const Hero = () => {
                     Book an appointment
                   </motion.h3>
                   <p className="text-base text-gray-600 font-light">
-                    AI-powered matching in seconds
+                    Smart symptom analysis matches you with specialists
                   </p>
                 </div>
 
@@ -258,12 +258,12 @@ const Hero = () => {
                   whileFocus="focus"
                 >
                   <label htmlFor="symptoms" className="text-xs font-semibold text-[#1E1E1E] block tracking-wide uppercase">
-                    What brings you in?
+                    Describe your symptoms
                   </label>
                   <motion.input
                     id="symptoms"
                     type="text"
-                    placeholder="e.g., Annual checkup, headache, knee pain..."
+                    placeholder="e.g., Persistent headache, chest pain, skin rash..."
                     className="w-full px-5 py-4 bg-white/50 backdrop-blur-sm border-2 border-gray-200/50 rounded-xl focus:ring-2 focus:ring-[#3A7FD5]/50 focus:border-[#3A7FD5] focus:bg-white outline-none transition-all duration-300 placeholder:text-gray-400"
                     whileFocus={{ scale: 1.01 }}
                   />

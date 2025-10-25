@@ -49,16 +49,16 @@ export default function Providers() {
             </h2>
             
             <p className="text-xl text-gray-600 mb-8 leading-relaxed">
-              Automate scheduling, reduce no-shows by 40%, and fill cancellations with AI-powered patient matching.
+              Smart scheduling with real-time availability syncing, automated notifications, and AI-powered patient matching to grow your practice.
             </p>
 
             {/* Features list */}
             <div className="space-y-4 mb-10">
               {[
-                'Automated appointment reminders',
-                'Real-time calendar synchronization',
-                'AI-powered patient matching',
-                'Reduced administrative overhead'
+                'Automated email reminders & confirmations',
+                'Real-time availability management',
+                'AI-matched patient referrals',
+                'Comprehensive provider profiles with specialties'
               ].map((feature, index) => (
                 <motion.div
                   key={index}

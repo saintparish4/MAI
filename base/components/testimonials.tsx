@@ -18,7 +18,7 @@ const testimonials: Testimonial[] = [
     name: 'Sarah Johnson',
     role: 'Patient',
     avatar: 'SJ',
-    quote: 'Nora made it so easy to find a great doctor near me. I got an appointment the same day!',
+    quote: 'I described my symptoms and NORA matched me with a dermatologist instantly. Booked same-day with real-time availability!',
     rating: 5
   },
   {
@@ -26,15 +26,15 @@ const testimonials: Testimonial[] = [
     name: 'Michael Chen',
     role: 'Patient',
     avatar: 'MC',
-    quote: 'The AI matching was spot-on. Found the perfect specialist for my needs without endless searching.',
+    quote: 'The AI symptom analysis was incredibly accurate. Found the perfect specialist who accepts my insurance in under 2 minutes.',
     rating: 5
   },
   {
     id: 3,
     name: 'Dr. Emily Rodriguez',
-    role: 'Provider',
+    role: 'Neurologist',
     avatar: 'ER',
-    quote: 'As a provider, Nora has reduced our no-shows by 40%. The automated reminders are a game-changer.',
+    quote: 'NORA\'s automated email reminders reduced our no-shows by 40%. The smart scheduling fills my calendar perfectly.',
     rating: 5
   },
   {
@@ -42,7 +42,7 @@ const testimonials: Testimonial[] = [
     name: 'James Patterson',
     role: 'Patient',
     avatar: 'JP',
-    quote: 'Finally, healthcare that feels modern. Booking appointments is as easy as ordering food.',
+    quote: 'Secure, HIPAA-compliant, and lightning fast. Got instant confirmation and a reminder 24 hours before my appointment.',
     rating: 5
   }
 ];
