@@ -24,8 +24,8 @@ export default function SymptomsPage() {
     try {
       const result = await analyzeSymptoms(description);
       setAnalysis(result.analysis);
-    } catch (err: any) {
-      setError(err.message || 'Failed to analyze symptoms');
+    } catch (err: unknown) {
+      setError(err instanceof Error ? err.message : 'Failed to analyze symptoms');
     } finally {
       setAnalyzing(false);
     }
@@ -120,7 +120,7 @@ export default function SymptomsPage() {
                 <div className="ml-3">
                   <p className="text-sm text-blue-700">
                     Disclaimer: This AI tool is for guidance only and does not provide medical diagnosis. 
-                    If you're experiencing a medical emergency, call 911 immediately.
+                    If you&apos;re experiencing a medical emergency, call 911 immediately.
                   </p>
                 </div>
               </div>
