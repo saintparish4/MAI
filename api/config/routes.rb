@@ -19,5 +19,12 @@ Rails.application.routes.draw do
         patch :cancel
     end
   end
+
+  # API routes
+  namespace :api do
+    namespace :v1 do
+      post '/analyze-symptoms', to: 'symptoms#analyze'
+    end
+  end
 end
 

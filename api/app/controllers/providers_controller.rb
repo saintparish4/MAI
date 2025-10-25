@@ -5,6 +5,11 @@ class ProvidersController < ApplicationController
     def index
         @providers = Provider.all
 
+        # AI Specialty Filter
+        if params[:ai_specialty].present?
+            @providers = @providers.by_ai_specialty(params[:ai_specialty])
+        end
+
         # Apply filters 
         @providers = @providers.by_specialty(params[:specialty]) if params[:specialty].present?
         @providers = @providers.by_location(params[:location]) if params[:location].present?
@@ -28,7 +33,8 @@ class ProvidersController < ApplicationController
         
         render json: {
             providers: @providers.as_json(include: :availabilities),
-            total: @providers.count, 
+            total: @providers.count,
+            ai_filtered: params[:ai_specialty].present?
         }
     end
 

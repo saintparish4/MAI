@@ -90,6 +90,25 @@ export interface AppointmentsResponse {
   past: Appointment[];
 }
 
+export interface SymptomAnalysis {
+  specialty: string;
+  urgency: string;
+  reasoning: string;
+  keywords: string[];
+  red_flags: string[];
+  specialty_name: string;
+  urgency_details: {
+    priority: number;
+    color: string;
+    message: string;
+  };
+}
+
+export interface SymptomAnalysisResponse {
+  analysis: SymptomAnalysis;
+  timestamp: string; 
+}
+
 export async function signup(
   email: string,
   password: string
@@ -363,4 +382,48 @@ export async function updateEmailPreferences(preferences: {
   }
 
   return data;
+}
+
+export async function analyzeSymptoms(description: string): Promise<SymptomAnalysisResponse> {
+  const res = await fetch(`${API_URL}/api/v1/analyze-symptoms`, {
+    method: "POST",
+    headers: { 'Content-Type': 'application/json' },
+    credentials: 'include',
+    body: JSON.stringify({ description }) 
+  });
+
+  const data = await res.json();
+
+  if (!res.ok) {
+    throw new Error(data.error || "Failed to analyze symptoms");
+  }
+
+  return data; 
+}
+
+export async function getProvidersByAISpecialty(specialty: string, params?: {
+  location?: string;
+  min_rating?: number;
+  sort?: string;
+}): Promise<ProvidersResponse> {
+  const queryParams = new URLSearchParams();
+
+  // Use ai_specialty parameter for backend filtering
+  queryParams.set("ai_specialty", specialty);
+
+  if (params?.location) queryParams.append("location", params.location);
+  if (params?.min_rating) queryParams.append('min_rating', params.min_rating.toString());
+  if (params?.sort) queryParams.append('sort', params.sort);
+
+  const url = `${API_URL}/providers?${queryParams}`;
+
+  const res = await fetch(url, {
+    credentials: 'include',
+  });
+
+  if (!res.ok) {
+    throw new Error("Failed to fetch providers");
+  }
+
+  return res.json();
 }

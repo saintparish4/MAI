@@ -50,14 +50,28 @@ Uses Resend API for transactional emails:
 ### Environment Variables
 Set the following in your production environment:
 ```bash
+# Required
+OPENAI_API_KEY=sk-your-openai-api-key-here
 RESEND_API_KEY=re_your_api_key_here
-RESEND_FROM_EMAIL="Your App <noreply@yourdomain.com>"  # Optional, defaults to onboarding@resend.dev
+
+# Optional
+RESEND_FROM_EMAIL="Your App <noreply@yourdomain.com>"  # Defaults to onboarding@resend.dev
 ```
 
-**Setting up your domain in Resend:**
+**Setting up OpenAI:**
+1. Get your API key from [platform.openai.com/api-keys](https://platform.openai.com/api-keys)
+2. The app uses `gpt-4o-mini` for cost-effective symptom analysis
+3. Estimated cost: ~$0.0002 per symptom analysis
+
+**Setting up Resend (Email):**
 1. Get your API key from [resend.com/api-keys](https://resend.com/api-keys)
 2. Add and verify your domain at [resend.com/domains](https://resend.com/domains)
 3. For testing, you can use Resend's default: `onboarding@resend.dev`
+
+**For local development:**
+1. Copy `.env.example` to `.env`
+2. Add your API keys
+3. Run `bundle install`
 
 ## Portfolio Project
 This is a demonstration project showcasing full-stack development skills. Provider data is fictional for demo purposes.

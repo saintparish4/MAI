@@ -1,22 +1,19 @@
-## 🚀 Future Development
+# NORA - Medical AI Booking Platform
 
-This project has significant growth potential. Planned features include:
+An AI-powered healthcare booking platform that intelligently matches patients with the right providers and eliminates scheduling friction.
 
-**Short Term:**
-- Provider dashboard with appointment management
-- Email notifications for bookings and reminders
-- Enhanced search and filtering
-- Appointment rescheduling
+## Key Features
 
-**Medium Term:**
-- Payment processing via Stripe
-- Review and rating system
-- Multi-location provider support
-- Calendar integrations (Google Calendar, iCal)
+- **AI-Powered Matching**: Intelligent symptom analysis that recommends the most appropriate medical specialists
+- **Smart Scheduling**: Real-time availability and instant appointment booking
+- **Secure Authentication**: JWT-based user authentication and authorization
+- **Automated Notifications**: Email reminders and confirmations for appointments
+- **Provider Management**: Comprehensive provider profiles with specialties and availability
 
-**Long Term:**
-- Telemedicine video consultations
-- EHR/EMR integrations (Epic, Cerner)
-- Mobile applications (iOS/Android)
-- HIPAA compliance certification
-- AI-powered appointment recommendations
+## Architecture
+
+- **Frontend**: Next.js 14+ with TypeScript, Tailwind CSS
+- **Backend**: Ruby on Rails 8 API
+- **Database**: SQLite (development), PostgreSQL-ready (production)
+- **AI Integration**: OpenAI GPT for symptom analysis and provider matching
+

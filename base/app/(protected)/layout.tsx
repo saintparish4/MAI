@@ -53,6 +53,12 @@ export default function ProtectedLayout({
                   Dashboard
                 </Link>
                 <Link 
+                  href="/booking/symptoms" 
+                  className="text-gray-600 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium transition-colors"
+                >
+                  AI Symptom Checker
+                </Link>
+                <Link 
                   href="/providers" 
                   className="text-gray-600 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium transition-colors"
                 >

@@ -14,6 +14,8 @@ gem "bcrypt"
 gem "rack-cors"
 gem "jwt"
 gem "resend"
+gem "ruby-openai", "~> 8.3"
+gem 'redis', '~> 5.4', '>= 5.4.1'
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem "tzinfo-data", platforms: %i[ windows jruby ]
@@ -60,4 +62,6 @@ end
 
 group :test do
   gem "rspec-sidekiq"
+  gem "vcr"
+  gem "webmock"
 end
