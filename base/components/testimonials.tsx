@@ -49,47 +49,22 @@ const testimonials: Testimonial[] = [
 
 export default function Testimonials() {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [direction, setDirection] = useState(0);
 
   const nextTestimonial = () => {
-    setDirection(1);
     setCurrentIndex((prev) => (prev + 1) % testimonials.length);
   };
 
   const prevTestimonial = () => {
-    setDirection(-1);
     setCurrentIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length);
   };
 
   const goToTestimonial = (index: number) => {
-    setDirection(index > currentIndex ? 1 : -1);
     setCurrentIndex(index);
   };
 
-  const variants = {
-    enter: (direction: number) => ({
-      x: direction > 0 ? 100 : -100,
-      opacity: 0,
-      filter: 'blur(4px)'
-    }),
-    center: {
-      x: 0,
-      opacity: 1,
-      filter: 'blur(0px)'
-    },
-    exit: (direction: number) => ({
-      x: direction < 0 ? 100 : -100,
-      opacity: 0,
-      filter: 'blur(4px)'
-    })
-  };
-
   return (
-    <section className="relative py-24 overflow-hidden">
-      {/* Background gradient */}
-      <div className="absolute inset-0 bg-gradient-to-b from-white via-slate-50 to-white" />
-      
-      <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section className="py-24 bg-white">
+      <div className="max-w-6xl mx-auto px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -97,48 +72,31 @@ export default function Testimonials() {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <motion.div
-            className="inline-block px-4 py-2 bg-gradient-to-r from-[#F47C6B]/10 to-[#3A7FD5]/10 backdrop-blur-sm rounded-full border border-white/40 mb-6"
-            initial={{ opacity: 0, scale: 0.9 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-          >
-            <span className="text-sm font-medium bg-gradient-to-r from-[#F47C6B] to-[#3A7FD5] bg-clip-text text-transparent">
-              Testimonials
-            </span>
-          </motion.div>
-          
-          <h2 className="text-4xl md:text-5xl font-bold text-[#1E1E1E] mb-4">
+          <h2 className="text-4xl md:text-5xl font-light text-gray-900 mb-4">
             What people are saying
           </h2>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+          <p className="text-xl text-gray-600 max-w-2xl mx-auto font-light">
             Join thousands of satisfied patients and providers
           </p>
         </motion.div>
 
-        {/* Carousel Container */}
+        {/* Testimonial Card */}
         <div className="relative max-w-4xl mx-auto">
-          <AnimatePresence initial={false} custom={direction} mode="wait">
+          <AnimatePresence mode="wait">
             <motion.div
               key={currentIndex}
-              custom={direction}
-              variants={variants}
-              initial="enter"
-              animate="center"
-              exit="exit"
-              transition={{
-                x: { type: "spring", stiffness: 300, damping: 30 },
-                opacity: { duration: 0.3 },
-                filter: { duration: 0.3 }
-              }}
-              className="bg-white/70 backdrop-blur-xl rounded-3xl p-10 md:p-14 shadow-[0_8px_40px_rgba(0,0,0,0.08)] border border-white/60"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.4 }}
+              className="bg-gray-50 rounded-3xl p-12 md:p-16"
             >
-              {/* Rating Stars */}
+              {/* Rating */}
               <div className="flex justify-center mb-8">
                 {[...Array(testimonials[currentIndex].rating)].map((_, i) => (
                   <motion.svg
                     key={i}
-                    className="w-6 h-6 text-[#F47C6B]"
+                    className="w-5 h-5 text-yellow-400"
                     fill="currentColor"
                     viewBox="0 0 20 20"
                     initial={{ opacity: 0, scale: 0 }}
@@ -151,24 +109,20 @@ export default function Testimonials() {
               </div>
 
               {/* Quote */}
-              <blockquote className="text-2xl md:text-3xl text-gray-700 font-light italic text-center mb-10 leading-relaxed">
-                &ldquo;{testimonials[currentIndex].quote}&rdquo;
+              <blockquote className="text-2xl md:text-3xl text-gray-700 font-light text-center mb-10 leading-relaxed">
+                "{testimonials[currentIndex].quote}"
               </blockquote>
 
               {/* Profile */}
               <div className="flex items-center justify-center">
-                <motion.div
-                  className="w-16 h-16 bg-gradient-to-br from-[#F47C6B] to-[#3A7FD5] rounded-full flex items-center justify-center text-white font-bold text-lg mr-4 shadow-lg"
-                  whileHover={{ scale: 1.1, rotate: 5 }}
-                  transition={{ duration: 0.3 }}
-                >
+                <div className="w-16 h-16 bg-gray-900 rounded-full flex items-center justify-center text-white font-medium text-lg mr-4">
                   {testimonials[currentIndex].avatar}
-                </motion.div>
+                </div>
                 <div className="text-left">
-                  <div className="font-bold text-[#1E1E1E] text-lg">
+                  <div className="font-medium text-gray-900 text-lg">
                     {testimonials[currentIndex].name}
                   </div>
-                  <div className="text-sm text-gray-500 font-medium">
+                  <div className="text-sm text-gray-600">
                     {testimonials[currentIndex].role}
                   </div>
                 </div>
@@ -177,44 +131,38 @@ export default function Testimonials() {
           </AnimatePresence>
 
           {/* Navigation Arrows */}
-          <motion.button
+          <button
             onClick={prevTestimonial}
-            className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 md:-translate-x-16 w-12 h-12 bg-white/90 backdrop-blur-sm rounded-full shadow-lg flex items-center justify-center hover:bg-white hover:scale-110 transition-all focus:outline-none focus:ring-2 focus:ring-[#3A7FD5] focus:ring-offset-2"
+            className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 md:-translate-x-16 w-12 h-12 bg-white rounded-full shadow-lg flex items-center justify-center hover:bg-gray-50 transition-colors border border-gray-200"
             aria-label="Previous testimonial"
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.9 }}
           >
-            <svg className="w-6 h-6 text-[#3A7FD5]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M15 19l-7-7 7-7" />
+            <svg className="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
             </svg>
-          </motion.button>
+          </button>
 
-          <motion.button
+          <button
             onClick={nextTestimonial}
-            className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 md:translate-x-16 w-12 h-12 bg-white/90 backdrop-blur-sm rounded-full shadow-lg flex items-center justify-center hover:bg-white hover:scale-110 transition-all focus:outline-none focus:ring-2 focus:ring-[#3A7FD5] focus:ring-offset-2"
+            className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 md:translate-x-16 w-12 h-12 bg-white rounded-full shadow-lg flex items-center justify-center hover:bg-gray-50 transition-colors border border-gray-200"
             aria-label="Next testimonial"
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.9 }}
           >
-            <svg className="w-6 h-6 text-[#3A7FD5]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" />
+            <svg className="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
             </svg>
-          </motion.button>
+          </button>
         </div>
 
         {/* Dots Navigation */}
-        <div className="flex justify-center mt-12 gap-3">
+        <div className="flex justify-center mt-12 gap-2">
           {testimonials.map((_, index) => (
-            <motion.button
+            <button
               key={index}
               onClick={() => goToTestimonial(index)}
-              className={`h-3 rounded-full transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-[#3A7FD5] focus:ring-offset-2 ${
+              className={`h-2 rounded-full transition-all duration-300 ${
                 index === currentIndex
-                  ? 'bg-gradient-to-r from-[#F47C6B] to-[#3A7FD5] w-10'
-                  : 'bg-gray-300 hover:bg-gray-400 w-3'
+                  ? 'bg-gray-900 w-8'
+                  : 'bg-gray-300 hover:bg-gray-400 w-2'
               }`}
-              whileHover={{ scale: 1.2 }}
-              whileTap={{ scale: 0.9 }}
               aria-label={`Go to testimonial ${index + 1}`}
             />
           ))}
