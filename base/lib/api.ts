@@ -195,7 +195,7 @@ export async function getCurrentUser(): Promise<User | null> {
 
     const data = await res.json();
     return data.user;
-  } catch (_error) {
+  } catch {
     removeToken();
     return null;
   }
@@ -299,7 +299,7 @@ export async function bookAppointment(params: {
   if (contentType && contentType.includes("application/json")) {
     try {
       data = await res.json();
-    } catch (_e) {
+    } catch {
       throw new Error("Server returned invalid JSON response");
     }
   } else {
