@@ -74,22 +74,66 @@ export default function Header() {
 
           {/* Mobile menu button */}
           <div className="md:hidden">
-            <button
+            <motion.button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="text-gray-700 hover:text-gray-900 transition-colors p-2"
+              className="relative p-2 text-gray-700 hover:text-gray-900 transition-colors"
               aria-label="Toggle menu"
+              aria-expanded={isMenuOpen}
+              whileTap={{ scale: 0.95 }}
+              whileHover={{ scale: 1.05 }}
             >
-              <motion.svg 
-                className="h-5 w-5" 
-                fill="none" 
-                viewBox="0 0 24 24" 
-                stroke="currentColor"
-                animate={{ rotate: isMenuOpen ? 90 : 0 }}
-                transition={{ duration: 0.2 }}
+              {/* Animated hamburger icon */}
+              <motion.div
+                className="relative w-6 h-6"
+                animate={{ rotate: isMenuOpen ? 180 : 0 }}
+                transition={{ duration: 0.3, ease: "easeInOut" }}
               >
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-              </motion.svg>
-            </button>
+                <motion.svg
+                  className="w-full h-full"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  {/* Top line */}
+                  <motion.line
+                    x1="3" y1="6" x2="21" y2="6"
+                    animate={{
+                      y1: isMenuOpen ? 12 : 6,
+                      y2: isMenuOpen ? 12 : 6,
+                      rotate: isMenuOpen ? 45 : 0,
+                    }}
+                    transition={{ duration: 0.3, ease: "easeInOut" }}
+                    style={{ transformOrigin: "12px 12px" }}
+                  />
+                  
+                  {/* Middle line */}
+                  <motion.line
+                    x1="3" y1="12" x2="21" y2="12"
+                    animate={{
+                      opacity: isMenuOpen ? 0 : 1,
+                      scaleX: isMenuOpen ? 0 : 1,
+                    }}
+                    transition={{ duration: 0.2, ease: "easeInOut" }}
+                    style={{ transformOrigin: "center" }}
+                  />
+                  
+                  {/* Bottom line */}
+                  <motion.line
+                    x1="3" y1="18" x2="21" y2="18"
+                    animate={{
+                      y1: isMenuOpen ? 12 : 18,
+                      y2: isMenuOpen ? 12 : 18,
+                      rotate: isMenuOpen ? -45 : 0,
+                    }}
+                    transition={{ duration: 0.3, ease: "easeInOut" }}
+                    style={{ transformOrigin: "12px 12px" }}
+                  />
+                </motion.svg>
+              </motion.div>
+            </motion.button>
           </div>
         </div>
 
