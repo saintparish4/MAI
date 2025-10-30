@@ -14,8 +14,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Mai Health | Seamless Healthcare Scheduling",
-  description: "Mai Health | Seamless Healthcare Scheduling",
+  title: "Nora Health | Seamless Healthcare Scheduling",
+  description: "Nora Health | Seamless Healthcare Scheduling",
 };
 
 export default function RootLayout({

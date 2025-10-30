@@ -32,6 +32,8 @@ export default function ProtectedLayout({
     return null;
   }
 
+  const isProvider = user?.is_provider;
+
   return (
     <div className="min-h-screen bg-gray-50">
       <header className="bg-white shadow-sm border-b">
@@ -46,30 +48,49 @@ export default function ProtectedLayout({
                 className="h-8 w-8"
               />
               <nav className="flex space-x-6">
-                <Link 
-                  href="/dashboard" 
-                  className="text-gray-600 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium transition-colors"
-                >
-                  Dashboard
-                </Link>
-                <Link 
-                  href="/booking/symptoms" 
-                  className="text-gray-600 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium transition-colors"
-                >
-                  AI Symptom Checker
-                </Link>
-                <Link 
-                  href="/providers" 
-                  className="text-gray-600 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium transition-colors"
-                >
-                  Browse Providers
-                </Link>
-                <Link 
-                  href="/appointments" 
-                  className="text-gray-600 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium transition-colors"
-                >
-                  My Appointments
-                </Link>
+                {isProvider ? (
+                  <>
+                    <Link 
+                      href="/provider/dashboard" 
+                      className="text-gray-600 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium transition-colors"
+                    >
+                      Dashboard
+                    </Link>
+                    <Link 
+                      href="/appointments" 
+                      className="text-gray-600 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium transition-colors"
+                    >
+                      Appointments
+                    </Link>
+                  </>
+                ) : (
+                  <>
+                    <Link 
+                      href="/dashboard" 
+                      className="text-gray-600 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium transition-colors"
+                    >
+                      Dashboard
+                    </Link>
+                    <Link 
+                      href="/booking/symptoms" 
+                      className="text-gray-600 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium transition-colors"
+                    >
+                      AI Symptom Checker
+                    </Link>
+                    <Link 
+                      href="/providers" 
+                      className="text-gray-600 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium transition-colors"
+                    >
+                      Browse Providers
+                    </Link>
+                    <Link 
+                      href="/appointments" 
+                      className="text-gray-600 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium transition-colors"
+                    >
+                      My Appointments
+                    </Link>
+                  </>
+                )}
                 <Link 
                   href="/settings" 
                   className="text-gray-600 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium transition-colors"

@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { useState, useEffect } from 'react';
 
 function NavLink({ href, children }: { href: string; children: React.ReactNode }) {
@@ -42,8 +43,15 @@ export default function Header() {
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
           <div className="hover:scale-105 transition-transform duration-200">
-            <Link href="/" className="text-xl font-light text-gray-900">
-              nora
+            <Link href="/" className="flex items-center gap-2">
+              <Image
+                src="/logo2.png"
+                alt="Nora logo"
+                width={42}
+                height={42}
+                priority
+              />
+              <span className="text-xl font-light text-gray-900">Nora</span>
             </Link>
           </div>
 

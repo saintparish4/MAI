@@ -24,6 +24,28 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       post '/analyze-symptoms', to: 'symptoms#analyze'
+
+      # Provider routes
+      namespace :provider do
+        get 'dashboard', to: 'dashboard#index'
+
+        # Calendar routes
+        namespace :calendar do
+          get 'connect'
+          get 'callback'
+          post 'sync'
+          delete 'disconnect'
+          get 'status'
+        end
+
+        # Appointments routes
+        resources :appointments, only: [:index, :update] do
+          member do
+            patch 'complete'
+            patch 'cancel'
+          end
+        end
+      end
     end
   end
 end

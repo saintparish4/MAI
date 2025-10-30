@@ -1,0 +1,3 @@
+calendar_sync_all:
+  cron: '*/15 * * * *' # Every 15 minutes
+  class: CalendarSyncAllJob

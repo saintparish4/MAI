@@ -1,6 +1,8 @@
 class Provider < ApplicationRecord
     has_many :availabilities, dependent: :destroy 
     has_many :appointments, dependent: :destroy 
+    has_many :blocked_slots, dependent: :destroy
+    has_one :calendar_connection, dependent: :destroy
 
     # Map AI specialty keys to provider specialties
     SPECIALTY_MAPPINGS = {
@@ -29,4 +31,8 @@ class Provider < ApplicationRecord
     scope :by_specialty, ->(specialty) { where(specialty: specialty) if specialty.present? }
     scope :by_location, ->(location) { where('location ILIKE ?', "%#{location}%") if location.present? }
     scope :rated_above, ->(rating) { where('rating >= ?', rating) if rating.present? } 
+    
+    def calendar_connected?
+        calendar_connection.present? && calendar_connection.active?
+    end
 end

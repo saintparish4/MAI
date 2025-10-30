@@ -21,6 +21,7 @@ export function removeToken(): void {
 export interface User {
   id: number;
   email: string;
+  is_provider?: boolean;
   booking_confirmations?: boolean;
   reminders_24h?: boolean;
   cancellation_notices?: boolean;
@@ -107,6 +108,27 @@ export interface SymptomAnalysis {
 export interface SymptomAnalysisResponse {
   analysis: SymptomAnalysis;
   timestamp: string; 
+}
+
+export interface ProviderStats {
+  total_appointments: number;
+  this_week_appointments: number;
+  completion_rate: number;
+  average_duration: number;
+  top_appointment_reasons: Array<{ reason: string; count: number }>;
+}
+
+export interface ProviderDashboard {
+  provider: {
+    id: number;
+    name: string;
+    specialty: string;
+    avatar_url: string;
+  };
+  stats: ProviderStats;
+  upcoming_appointments: Appointment[];
+  recent_appointments: Appointment[];
+  calendar_connected: boolean;
 }
 
 export async function signup(
@@ -426,4 +448,102 @@ export async function getProvidersByAISpecialty(specialty: string, params?: {
   }
 
   return res.json();
+}
+
+export async function getProviderDashboard(): Promise<ProviderDashboard> {
+  const res = await fetch(`${API_URL}/api/v1/provider/dashboard`, {
+    credentials: 'include'
+  });
+  
+  if (!res.ok) {
+    throw new Error('Failed to fetch provider dashboard');
+  }
+  
+  return res.json();
+}
+
+export async function getCalendarConnectionStatus(): Promise<{ connected: boolean; last_synced: string; needs_sync: boolean }> {
+  const res = await fetch(`${API_URL}/api/v1/provider/calendar/status`, {
+    credentials: 'include'
+  });
+  
+  if (!res.ok) {
+    throw new Error('Failed to check calendar status');
+  }
+  
+  return res.json();
+}
+
+export async function connectGoogleCalendar(): Promise<{ authorization_url: string }> {
+  const res = await fetch(`${API_URL}/api/v1/provider/calendar/connect`, {
+    credentials: 'include'
+  });
+  
+  if (!res.ok) {
+    throw new Error('Failed to initiate calendar connection');
+  }
+  
+  return res.json();
+}
+
+export async function syncGoogleCalendar(): Promise<void> {
+  const res = await fetch(`${API_URL}/api/v1/provider/calendar/sync`, {
+    method: 'POST',
+    credentials: 'include'
+  });
+  
+  const data = await res.json();
+  
+  if (!res.ok) {
+    throw new Error(data.error || 'Failed to sync calendar');
+  }
+  
+  return data;
+}
+
+export async function disconnectGoogleCalendar(): Promise<void> {
+  const res = await fetch(`${API_URL}/api/v1/provider/calendar/disconnect`, {
+    method: 'DELETE',
+    credentials: 'include'
+  });
+  
+  const data = await res.json();
+  
+  if (!res.ok) {
+    throw new Error(data.error || 'Failed to disconnect calendar');
+  }
+  
+  return data;
+}
+
+export async function markAppointmentComplete(id: number, notes?: string): Promise<Appointment> {
+  const res = await fetch(`${API_URL}/api/v1/provider/appointments/${id}/complete`, {
+    method: 'PATCH',
+    headers: { 'Content-Type': 'application/json' },
+    credentials: 'include',
+    body: JSON.stringify({ notes })
+  });
+  
+  const data = await res.json();
+  
+  if (!res.ok) {
+    throw new Error(data.error || 'Failed to mark appointment as complete');
+  }
+  
+  return data;
+}
+
+export async function cancelProviderAppointment(id: number): Promise<Appointment> {
+  const res = await fetch(`${API_URL}/api/v1/provider/appointments/${id}/cancel`, {
+    method: 'PATCH',
+    credentials: 'include'
+  });
+  
+  const data = await res.json();
+  
+  if (!res.ok) {
+    throw new Error(data.error || 'Failed to cancel appointment');
+  }
+  
+  return data;
 }

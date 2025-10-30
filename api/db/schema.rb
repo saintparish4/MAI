@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_10_19_173830) do
+ActiveRecord::Schema[8.0].define(version: 2025_10_30_023656) do
   create_table "appointments", force: :cascade do |t|
     t.integer "patient_id", null: false
     t.integer "provider_id", null: false
@@ -39,6 +39,33 @@ ActiveRecord::Schema[8.0].define(version: 2025_10_19_173830) do
     t.index ["provider_id"], name: "index_availabilities_on_provider_id"
   end
 
+  create_table "blocked_slots", force: :cascade do |t|
+    t.integer "provider_id", null: false
+    t.datetime "start_time", null: false
+    t.datetime "end_time", null: false
+    t.string "reason"
+    t.string "source", default: "manual"
+    t.string "external_event_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["external_event_id"], name: "index_blocked_slots_on_external_event_id"
+    t.index ["provider_id", "start_time"], name: "index_blocked_slots_on_provider_id_and_start_time"
+    t.index ["provider_id"], name: "index_blocked_slots_on_provider_id"
+  end
+
+  create_table "calendar_connections", force: :cascade do |t|
+    t.integer "provider_id", null: false
+    t.text "access_token"
+    t.text "refresh_token"
+    t.string "calendar_id"
+    t.datetime "expires_at"
+    t.datetime "last_synced_at"
+    t.boolean "active", default: true
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["provider_id"], name: "index_calendar_connections_on_provider_id"
+  end
+
   create_table "providers", force: :cascade do |t|
     t.string "name", null: false
     t.string "specialty", null: false
@@ -62,9 +89,14 @@ ActiveRecord::Schema[8.0].define(version: 2025_10_19_173830) do
     t.boolean "booking_confirmations", default: true
     t.boolean "reminders_24h", default: true
     t.boolean "cancellation_notices", default: true
+    t.boolean "is_provider", default: false
+    t.integer "provider_id"
+    t.index ["provider_id"], name: "index_users_on_provider_id"
   end
 
   add_foreign_key "appointments", "providers"
   add_foreign_key "appointments", "users", column: "patient_id"
   add_foreign_key "availabilities", "providers"
+  add_foreign_key "blocked_slots", "providers"
+  add_foreign_key "calendar_connections", "providers"
 end
