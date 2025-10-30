@@ -1,7 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'motion/react';
+import React, { useEffect, useRef, useState } from 'react';
 
 interface Testimonial {
   id: number;
@@ -49,6 +48,9 @@ const testimonials: Testimonial[] = [
 
 export default function Testimonials() {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
+  const [progressPct, setProgressPct] = useState(0);
+  const touchStartXRef = useRef<number | null>(null);
 
   const nextTestimonial = () => {
     setCurrentIndex((prev) => (prev + 1) % testimonials.length);
@@ -62,14 +64,60 @@ export default function Testimonials() {
     setCurrentIndex(index);
   };
 
+  useEffect(() => {
+    if (isPaused) return;
+    const id = setInterval(() => {
+      setCurrentIndex((prev) => (prev + 1) % testimonials.length);
+    }, 6000);
+    return () => clearInterval(id);
+  }, [isPaused]);
+
+  useEffect(() => {
+    // Reset progress on index change
+    setProgressPct(0);
+    if (isPaused) return;
+    const stepMs = 100;
+    const totalMs = 6000;
+    const increment = (stepMs / totalMs) * 100;
+    const id = setInterval(() => {
+      setProgressPct((p) => {
+        const next = p + increment;
+        return next >= 100 ? 100 : next;
+      });
+    }, stepMs);
+    return () => clearInterval(id);
+  }, [currentIndex, isPaused]);
+
+  const handleKeyDown: React.KeyboardEventHandler<HTMLDivElement> = (e) => {
+    if (e.key === 'ArrowLeft') {
+      prevTestimonial();
+    } else if (e.key === 'ArrowRight') {
+      nextTestimonial();
+    }
+  };
+
+  const handleTouchStart: React.TouchEventHandler<HTMLDivElement> = (e) => {
+    touchStartXRef.current = e.touches[0]?.clientX ?? null;
+  };
+
+  const handleTouchEnd: React.TouchEventHandler<HTMLDivElement> = (e) => {
+    const startX = touchStartXRef.current;
+    const endX = e.changedTouches[0]?.clientX ?? null;
+    touchStartXRef.current = null;
+    if (startX == null || endX == null) return;
+    const delta = endX - startX;
+    if (Math.abs(delta) < 40) return;
+    if (delta < 0) {
+      nextTestimonial();
+    } else {
+      prevTestimonial();
+    }
+  };
+
   return (
     <section className="py-24 bg-white">
       <div className="max-w-6xl mx-auto px-6 lg:px-8">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
+        <div
           className="text-center mb-16"
         >
           <h2 className="text-4xl md:text-5xl font-light text-gray-900 mb-4">
@@ -78,38 +126,39 @@ export default function Testimonials() {
           <p className="text-xl text-gray-600 max-w-2xl mx-auto font-light">
             Join thousands of satisfied patients and providers
           </p>
-        </motion.div>
+        </div>
 
         {/* Testimonial Card */}
-        <div className="relative max-w-4xl mx-auto">
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={currentIndex}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              transition={{ duration: 0.4 }}
-              className="bg-gray-50 rounded-3xl p-12 md:p-16"
-            >
+        <div
+          className="relative max-w-4xl mx-auto outline-none"
+          tabIndex={0}
+          role="region"
+          aria-label="Testimonials carousel"
+          onKeyDown={handleKeyDown}
+          onMouseEnter={() => setIsPaused(true)}
+          onMouseLeave={() => setIsPaused(false)}
+          onFocus={() => setIsPaused(true)}
+          onBlur={() => setIsPaused(false)}
+          onTouchStart={handleTouchStart}
+          onTouchEnd={handleTouchEnd}
+        >
+          <div className="bg-gray-50 rounded-3xl p-12 md:p-16 transition-all duration-300 hover:shadow-xl hover:scale-[1.01]">
               {/* Rating */}
               <div className="flex justify-center mb-8">
                 {[...Array(testimonials[currentIndex].rating)].map((_, i) => (
-                  <motion.svg
+                  <svg
                     key={i}
                     className="w-5 h-5 text-yellow-400"
                     fill="currentColor"
                     viewBox="0 0 20 20"
-                    initial={{ opacity: 0, scale: 0 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    transition={{ delay: i * 0.1, duration: 0.3 }}
                   >
                     <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                  </motion.svg>
+                  </svg>
                 ))}
               </div>
 
               {/* Quote */}
-              <blockquote className="text-2xl md:text-3xl text-gray-700 font-light text-center mb-10 leading-relaxed">
+              <blockquote className="text-2xl md:text-3xl text-gray-700 font-light text-center mb-10 leading-relaxed transition-opacity duration-500" aria-live="polite">
                 &ldquo;{testimonials[currentIndex].quote}&rdquo;
               </blockquote>
 
@@ -127,8 +176,14 @@ export default function Testimonials() {
                   </div>
                 </div>
               </div>
-            </motion.div>
-          </AnimatePresence>
+            {/* Autoplay progress */}
+            <div className="mt-10 h-1 bg-gray-200 rounded-full overflow-hidden" aria-hidden>
+              <div
+                className="h-full bg-gray-900 transition-[width] duration-100 ease-linear"
+                style={{ width: `${progressPct}%` }}
+              />
+            </div>
+          </div>
 
           {/* Navigation Arrows */}
           <button

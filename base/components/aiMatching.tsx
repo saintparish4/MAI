@@ -1,7 +1,6 @@
 'use client';
 
 import React from 'react';
-import { motion } from 'motion/react';
 
 export default function AIMatching() {
   return (
@@ -9,12 +8,8 @@ export default function AIMatching() {
       <div className="max-w-6xl mx-auto px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           {/* Left: AI Chat Interface */}
-          <motion.div
+          <div
             className="relative order-2 lg:order-1"
-            initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
           >
             <div className="bg-gray-50 rounded-2xl p-8 shadow-sm border border-gray-200">
               {/* Chat Header */}
@@ -31,27 +26,19 @@ export default function AIMatching() {
               {/* Chat Messages */}
               <div className="space-y-4">
                 {/* User Message */}
-                <motion.div
+                <div
                   className="flex justify-end"
-                  initial={{ opacity: 0, x: 20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.4, delay: 0.2 }}
                 >
                   <div className="bg-gray-900 text-white rounded-2xl rounded-tr-sm px-4 py-3 max-w-xs">
                     <p className="text-sm">
                       I have a persistent headache and need to see a neurologist
                     </p>
                   </div>
-                </motion.div>
+                </div>
 
                 {/* AI Response */}
-                <motion.div
+                <div
                   className="flex justify-start"
-                  initial={{ opacity: 0, x: -20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.4, delay: 0.4 }}
                 >
                   <div className="bg-white rounded-2xl rounded-tl-sm px-4 py-3 max-w-sm shadow-sm border border-gray-200">
                     <p className="text-sm text-gray-700 mb-3">
@@ -64,13 +51,9 @@ export default function AIMatching() {
                         { name: 'Dr. Sarah Chen', rating: '4.9', availability: 'Available today' },
                         { name: 'Dr. Michael Park', rating: '4.8', availability: 'Available tomorrow' }
                       ].map((doctor, index) => (
-                        <motion.div
+                        <div
                           key={index}
                           className="bg-gray-50 rounded-lg p-3 border border-gray-200"
-                          initial={{ opacity: 0, y: 10 }}
-                          whileInView={{ opacity: 1, y: 0 }}
-                          viewport={{ once: true }}
-                          transition={{ duration: 0.3, delay: 0.6 + index * 0.1 }}
                         >
                           <div className="flex items-center justify-between">
                             <div>
@@ -85,31 +68,23 @@ export default function AIMatching() {
                               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                             </svg>
                           </div>
-                        </motion.div>
+                        </div>
                       ))}
                     </div>
 
                     {/* Action Button */}
-                    <motion.button
+                    <button
                       className="w-full mt-3 py-2 bg-gray-900 text-white text-sm font-medium rounded-lg"
-                      whileHover={{ scale: 1.02 }}
-                      whileTap={{ scale: 0.98 }}
-                      initial={{ opacity: 0 }}
-                      whileInView={{ opacity: 1 }}
-                      viewport={{ once: true }}
-                      transition={{ delay: 0.9 }}
                     >
                       View All Matches
-                    </motion.button>
+                    </button>
                   </div>
-                </motion.div>
+                </div>
               </div>
 
-              {/* Typing Indicator */}
-              <motion.div
+              {/* Typing Indicator (static) */}
+              <div
                 className="mt-4 flex items-center gap-2 text-xs text-gray-600"
-                animate={{ opacity: [0.5, 1, 0.5] }}
-                transition={{ duration: 2, repeat: Infinity }}
               >
                 <div className="flex gap-1">
                   <div className="w-1 h-1 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '0ms' }} />
@@ -117,17 +92,13 @@ export default function AIMatching() {
                   <div className="w-1 h-1 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '300ms' }} />
                 </div>
                 <span>AI is analyzing...</span>
-              </motion.div>
+              </div>
             </div>
-          </motion.div>
+          </div>
 
           {/* Right: Content */}
-          <motion.div
+          <div
             className="space-y-8 order-1 lg:order-2"
-            initial={{ opacity: 0, x: 30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
           >
             <h2 className="text-4xl md:text-5xl font-light text-gray-900 leading-tight">
               Your intelligent{' '}
@@ -154,13 +125,9 @@ export default function AIMatching() {
                   description: 'Live availability with instant booking and automated notifications'
                 }
               ].map((feature, index) => (
-                <motion.div
+                <div
                   key={index}
                   className="flex items-start gap-4 p-4 bg-gray-50 rounded-lg"
-                  initial={{ opacity: 0, x: 20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.4, delay: index * 0.1 }}
                 >
                   <div className="w-6 h-6 bg-gray-900 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
                     <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
@@ -175,10 +142,10 @@ export default function AIMatching() {
                       {feature.description}
                     </p>
                   </div>
-                </motion.div>
+                </div>
               ))}
             </div>
-          </motion.div>
+          </div>
         </div>
       </div>
     </section>

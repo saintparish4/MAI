@@ -1,7 +1,6 @@
 'use client';
 
 import React from 'react';
-import { motion } from 'motion/react';
 
 const steps = [
   {
@@ -41,12 +40,8 @@ export default function HowItWorks() {
     <section className="py-24 bg-gray-50">
       <div className="max-w-6xl mx-auto px-6 lg:px-8">
         {/* Header */}
-        <motion.div
+        <div
           className="text-center mb-20"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
         >
           <h2 className="text-4xl md:text-5xl font-light text-gray-900 mb-4">
             How it works
@@ -54,18 +49,14 @@ export default function HowItWorks() {
           <p className="text-xl text-gray-600 max-w-2xl mx-auto font-light">
             Three simple steps to find the perfect healthcare match
           </p>
-        </motion.div>
+        </div>
 
         {/* Steps */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
           {steps.map((step, index) => (
-            <motion.div
+            <div
               key={step.id}
               className="text-center"
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: index * 0.1 }}
             >
               {/* Step number */}
               <div className="mb-8">
@@ -77,13 +68,11 @@ export default function HowItWorks() {
               </div>
 
               {/* Icon */}
-              <motion.div
+              <div
                 className="w-12 h-12 bg-gray-900 rounded-full flex items-center justify-center mx-auto mb-6 text-white"
-                whileHover={{ scale: 1.1 }}
-                transition={{ duration: 0.2 }}
               >
                 {step.icon}
-              </motion.div>
+              </div>
 
               {/* Content */}
               <h3 className="text-xl font-medium text-gray-900 mb-3">
@@ -92,26 +81,20 @@ export default function HowItWorks() {
               <p className="text-gray-600 font-light leading-relaxed">
                 {step.description}
               </p>
-            </motion.div>
+            </div>
           ))}
         </div>
 
         {/* CTA */}
-        <motion.div
+        <div
           className="text-center mt-16"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.4 }}
         >
-          <motion.button
+          <button
             className="px-8 py-4 bg-gray-900 text-white font-medium rounded-full hover:bg-gray-800 transition-colors shadow-sm hover:shadow-md"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
           >
             Try it yourself
-          </motion.button>
-        </motion.div>
+          </button>
+        </div>
       </div>
     </section>
   );

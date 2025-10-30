@@ -1,7 +1,6 @@
 'use client';
 
 import React from 'react';
-import { motion } from 'motion/react';
 import Link from 'next/link';
 
 export default function Footer() {
@@ -32,12 +31,7 @@ export default function Footer() {
         {/* Main Footer Content */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
           {/* Brand Column */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-          >
+          <div>
             <h3 className="text-2xl font-light mb-4">nora</h3>
             <p className="text-gray-400 leading-relaxed mb-6 font-light">
               AI-powered symptom analysis and smart scheduling that connects patients with the right specialists instantly.
@@ -48,15 +42,10 @@ export default function Footer() {
               </svg>
               HIPAA Compliant
             </div>
-          </motion.div>
+          </div>
 
           {/* Patients Column */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-          >
+          <div>
             <h3 className="font-medium text-lg mb-6 text-white">Patients</h3>
             <ul className="space-y-3">
               {footerLinks.patients.map((link, index) => (
@@ -70,15 +59,10 @@ export default function Footer() {
                 </li>
               ))}
             </ul>
-          </motion.div>
+          </div>
 
           {/* Providers Column */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-          >
+          <div>
             <h3 className="font-medium text-lg mb-6 text-white">Providers</h3>
             <ul className="space-y-3">
               {footerLinks.providers.map((link, index) => (
@@ -92,15 +76,10 @@ export default function Footer() {
                 </li>
               ))}
             </ul>
-          </motion.div>
+          </div>
 
           {/* Company Column */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.3 }}
-          >
+          <div>
             <h3 className="font-medium text-lg mb-6 text-white">Company</h3>
             <ul className="space-y-3">
               {footerLinks.company.map((link, index) => (
@@ -114,19 +93,15 @@ export default function Footer() {
                 </li>
               ))}
             </ul>
-          </motion.div>
+          </div>
         </div>
 
         {/* Divider */}
         <div className="h-px bg-gray-800 mb-8" />
 
         {/* Bottom Bar */}
-        <motion.div
+        <div
           className="flex flex-col md:flex-row justify-between items-center gap-6"
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.4 }}
         >
           <p className="text-gray-400 text-sm font-light">
             © 2025 Nora Health. All rights reserved.
@@ -153,7 +128,7 @@ export default function Footer() {
               <span>24/7 Support</span>
             </div>
           </div>
-        </motion.div>
+        </div>
       </div>
     </footer>
   );

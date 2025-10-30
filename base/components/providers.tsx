@@ -1,7 +1,6 @@
 'use client';
 
 import React from 'react';
-import { motion } from 'motion/react';
 import Link from 'next/link';
 
 export default function Providers() {
@@ -10,12 +9,7 @@ export default function Providers() {
       <div className="max-w-6xl mx-auto px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           {/* Left Content */}
-          <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-          >
+          <div>
             <h2 className="text-4xl md:text-5xl font-light text-gray-900 mb-6">
               Designed for{' '}
               <span className="font-medium">providers</span>
@@ -33,13 +27,9 @@ export default function Providers() {
                 'AI-matched patient referrals',
                 'Comprehensive provider profiles'
               ].map((feature, index) => (
-                <motion.div
+                <div
                   key={index}
                   className="flex items-center gap-3"
-                  initial={{ opacity: 0, x: -20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.4, delay: index * 0.1 }}
                 >
                   <div className="flex-shrink-0 w-5 h-5 bg-gray-900 rounded-full flex items-center justify-center">
                     <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
@@ -47,14 +37,11 @@ export default function Providers() {
                     </svg>
                   </div>
                   <span className="text-gray-700 font-medium">{feature}</span>
-                </motion.div>
+                </div>
               ))}
             </div>
             
-            <motion.div
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
+            <div>
               <Link
                 href="/signup?role=provider"
                 className="inline-flex items-center gap-2 px-8 py-4 bg-gray-900 text-white font-medium rounded-full hover:bg-gray-800 transition-colors shadow-sm hover:shadow-md"
@@ -64,16 +51,12 @@ export default function Providers() {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
                 </svg>
               </Link>
-            </motion.div>
-          </motion.div>
+            </div>
+          </div>
 
           {/* Right Dashboard Mockup */}
-          <motion.div
+          <div
             className="relative"
-            initial={{ opacity: 0, x: 30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
           >
             <div className="bg-white rounded-2xl p-8 shadow-lg border border-gray-200">
               {/* Dashboard Header */}
@@ -92,13 +75,9 @@ export default function Providers() {
                   { value: '156', label: 'This Week' },
                   { value: '98%', label: 'Satisfaction' }
                 ].map((stat, index) => (
-                  <motion.div
+                  <div
                     key={index}
                     className="bg-gray-50 rounded-lg p-4 text-center"
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.4, delay: index * 0.1 }}
                   >
                     <div className="text-xl font-semibold text-gray-900 mb-1">
                       {stat.value}
@@ -106,7 +85,7 @@ export default function Providers() {
                     <div className="text-xs text-gray-600">
                       {stat.label}
                     </div>
-                  </motion.div>
+                  </div>
                 ))}
               </div>
 
@@ -118,13 +97,9 @@ export default function Providers() {
                   { time: '10:30 AM', patient: 'Michael Chen', type: 'Consultation' },
                   { time: '2:00 PM', patient: 'Emily Davis', type: 'Check-up' }
                 ].map((appointment, index) => (
-                  <motion.div
+                  <div
                     key={index}
                     className="flex items-center justify-between p-3 bg-gray-50 rounded-lg"
-                    initial={{ opacity: 0, x: 20 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.3, delay: index * 0.1 }}
                   >
                     <div className="flex items-center gap-3">
                       <div className="w-8 h-8 bg-gray-200 rounded-full"></div>
@@ -140,23 +115,18 @@ export default function Providers() {
                     <div className="text-sm text-gray-600">
                       {appointment.time}
                     </div>
-                  </motion.div>
+                  </div>
                 ))}
               </div>
             </div>
 
-            {/* Floating badge */}
-            <motion.div
+            {/* Floating badge (static) */}
+            <div
               className="absolute -top-4 -right-4 bg-gray-900 text-white px-4 py-2 rounded-full text-sm font-medium shadow-lg"
-              initial={{ opacity: 0, scale: 0 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              animate={{ y: [0, -5, 0] }}
-              transition={{ y: { duration: 2, repeat: Infinity, ease: "easeInOut" } }}
             >
               Live Now
-            </motion.div>
-          </motion.div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
