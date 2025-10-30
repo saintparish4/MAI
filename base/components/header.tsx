@@ -1,61 +1,51 @@
 'use client';
 
 import Link from 'next/link';
-import { useState } from 'react';
-import { motion, useScroll, useTransform, AnimatePresence } from 'motion/react';
+import { useState, useEffect } from 'react';
 
 function NavLink({ href, children }: { href: string; children: React.ReactNode }) {
   return (
     <Link 
       href={href}
-      className="relative text-gray-700 hover:text-gray-900 transition-colors font-medium text-sm"
+      className="relative text-gray-700 hover:text-gray-900 transition-colors font-medium text-sm group"
     >
       {children}
-      <motion.div
-        className="absolute -bottom-1 left-0 h-px bg-gray-900"
-        initial={{ width: 0 }}
-        whileHover={{ width: '100%' }}
-        transition={{ duration: 0.2 }}
-      />
+      <div className="absolute -bottom-1 left-0 h-px bg-gray-900 w-0 group-hover:w-full transition-all duration-200" />
     </Link>
   );
 }
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const { scrollY } = useScroll();
-  
-  const backgroundColor = useTransform(
-    scrollY,
-    [0, 20],
-    ['rgba(255, 255, 255, 0)', 'rgba(255, 255, 255, 0.95)']
-  );
+  const [isScrolled, setIsScrolled] = useState(false);
 
-  const backdropBlur = useTransform(
-    scrollY,
-    [0, 20],
-    ['blur(0px)', 'blur(20px)']
-  );
+  // Handle scroll effect with native JavaScript
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 20);
+    };
+    if (typeof window !== 'undefined') {
+      window.addEventListener('scroll', handleScroll);
+      return () => window.removeEventListener('scroll', handleScroll);
+    }
+  }, []);
 
   return (
-    <motion.header
-      initial={{ y: -20, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.5 }}
-      style={{ backgroundColor, backdropFilter: backdropBlur }}
-      className="fixed top-0 left-0 right-0 z-50 border-b border-gray-100"
+    <header
+      className={`fixed top-0 left-0 right-0 z-50 border-b border-gray-100 transition-all duration-300 ${
+        isScrolled 
+          ? 'bg-white/95 backdrop-blur-md' 
+          : 'bg-white/0 backdrop-blur-none'
+      }`}
     >
       <nav className="max-w-6xl mx-auto px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
-          <motion.div
-            whileHover={{ scale: 1.05 }}
-            transition={{ duration: 0.2 }}
-          >
+          <div className="hover:scale-105 transition-transform duration-200">
             <Link href="/" className="text-xl font-light text-gray-900">
               nora
             </Link>
-          </motion.div>
+          </div>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
@@ -74,80 +64,47 @@ export default function Header() {
 
           {/* Mobile menu button */}
           <div className="md:hidden">
-            <motion.button
+            <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="relative p-2 text-gray-700 hover:text-gray-900 transition-colors"
+              className="relative p-2 text-gray-700 hover:text-gray-900 transition-colors active:scale-95 hover:scale-105"
               aria-label="Toggle menu"
               aria-expanded={isMenuOpen}
-              whileTap={{ scale: 0.95 }}
-              whileHover={{ scale: 1.05 }}
             >
-              {/* Animated hamburger icon */}
-              <motion.div
-                className="relative w-6 h-6"
-                animate={{ rotate: isMenuOpen ? 180 : 0 }}
-                transition={{ duration: 0.3, ease: "easeInOut" }}
-              >
-                <motion.svg
-                  className="w-full h-full"
+              {/* Unique 9-dot grid menu icon */}
+              <div className={`relative w-6 h-6 transition-transform duration-300 ease-in-out ${isMenuOpen ? 'rotate-90' : 'rotate-0'}`}>
+                <svg
+                  className="w-full h-full [transform-box:fill-box]"
                   viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
+                  fill="currentColor"
+                  aria-hidden="true"
                 >
-                  {/* Top line */}
-                  <motion.line
-                    x1="3" y1="6" x2="21" y2="6"
-                    animate={{
-                      y1: isMenuOpen ? 12 : 6,
-                      y2: isMenuOpen ? 12 : 6,
-                      rotate: isMenuOpen ? 45 : 0,
-                    }}
-                    transition={{ duration: 0.3, ease: "easeInOut" }}
-                    style={{ transformOrigin: "12px 12px" }}
-                  />
-                  
-                  {/* Middle line */}
-                  <motion.line
-                    x1="3" y1="12" x2="21" y2="12"
-                    animate={{
-                      opacity: isMenuOpen ? 0 : 1,
-                      scaleX: isMenuOpen ? 0 : 1,
-                    }}
-                    transition={{ duration: 0.2, ease: "easeInOut" }}
-                    style={{ transformOrigin: "center" }}
-                  />
-                  
-                  {/* Bottom line */}
-                  <motion.line
-                    x1="3" y1="18" x2="21" y2="18"
-                    animate={{
-                      y1: isMenuOpen ? 12 : 18,
-                      y2: isMenuOpen ? 12 : 18,
-                      rotate: isMenuOpen ? -45 : 0,
-                    }}
-                    transition={{ duration: 0.3, ease: "easeInOut" }}
-                    style={{ transformOrigin: "12px 12px" }}
-                  />
-                </motion.svg>
-              </motion.div>
-            </motion.button>
+                  {/* Row 1 */}
+                  <circle cx="6" cy="6" r="1.6" className={`transition-all duration-300 ease-out ${isMenuOpen ? 'opacity-70 [transition-delay:0ms]' : 'opacity-100'}`} />
+                  <circle cx="12" cy="6" r="1.6" className={`transition-all duration-300 ease-out ${isMenuOpen ? 'opacity-80 [transition-delay:50ms]' : 'opacity-100'}`} />
+                  <circle cx="18" cy="6" r="1.6" className={`transition-all duration-300 ease-out ${isMenuOpen ? 'opacity-70 [transition-delay:100ms]' : 'opacity-100'}`} />
+
+                  {/* Row 2 */}
+                  <circle cx="6" cy="12" r="1.6" className={`transition-all duration-300 ease-out ${isMenuOpen ? 'opacity-80 [transition-delay:150ms]' : 'opacity-100'}`} />
+                  <circle cx="12" cy="12" r="1.6" className={`transition-all duration-300 ease-out origin-center ${isMenuOpen ? 'scale-125 opacity-100 [transition-delay:200ms]' : 'scale-100 opacity-100'}`} />
+                  <circle cx="18" cy="12" r="1.6" className={`transition-all duration-300 ease-out ${isMenuOpen ? 'opacity-80 [transition-delay:250ms]' : 'opacity-100'}`} />
+
+                  {/* Row 3 */}
+                  <circle cx="6" cy="18" r="1.6" className={`transition-all duration-300 ease-out ${isMenuOpen ? 'opacity-70 [transition-delay:300ms]' : 'opacity-100'}`} />
+                  <circle cx="12" cy="18" r="1.6" className={`transition-all duration-300 ease-out ${isMenuOpen ? 'opacity-80 [transition-delay:350ms]' : 'opacity-100'}`} />
+                  <circle cx="18" cy="18" r="1.6" className={`transition-all duration-300 ease-out ${isMenuOpen ? 'opacity-70 [transition-delay:400ms]' : 'opacity-100'}`} />
+                </svg>
+              </div>
+            </button>
           </div>
         </div>
 
         {/* Mobile Navigation Menu */}
-        <AnimatePresence>
-          {isMenuOpen && (
-            <motion.div 
-              className="md:hidden"
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: 'auto' }}
-              exit={{ opacity: 0, height: 0 }}
-              transition={{ duration: 0.3 }}
-            >
-              <div className="px-0 pt-4 pb-6 space-y-1 bg-white border-t border-gray-100">
+        <div className={`md:hidden overflow-hidden transition-all duration-300 ease-in-out ${
+          isMenuOpen 
+            ? 'max-h-96 opacity-100' 
+            : 'max-h-0 opacity-0'
+        }`}>
+          <div className="px-0 pt-4 pb-6 space-y-1 bg-white border-t border-gray-100">
                 <Link
                   href="/booking/symptoms"
                   className="block px-4 py-3 text-gray-700 hover:text-gray-900 hover:bg-gray-50 transition-colors text-base font-medium rounded-lg"
@@ -192,11 +149,9 @@ export default function Header() {
                     Get Started
                   </Link>
                 </div>
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
+          </div>
+        </div>
       </nav>
-    </motion.header>
+    </header>
   );
 }
